@@ -23,11 +23,9 @@ Please use the [Wiki](https://github.com/ClinicalSoftwareSolutions/7breaths/wiki
 
 ## Contributors
 
-+Wai Keong
-
-+Neville Dastur
-
-+Barry Rowlingson
++ Wai Keong
++ Neville Dastur
++ Barry Rowlingson
 
 ## License
 

@@ -1,5 +1,7 @@
 <Alloy>
-	<Window class="container">
-		<Label id="label" onClick="doClick">Hello, World</Label>
+	<Window id="MainWindow">
+		<Label id="usage">Tap the lungs each time you see the chest wall rise</Label>
+		<ImageView id="lungs" />
+		<Label id="rr" />
 	</Window>
 </Alloy>

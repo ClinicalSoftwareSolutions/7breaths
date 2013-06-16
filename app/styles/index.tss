@@ -1,8 +1,23 @@
-".container": {
+"#MainWindow": {
 	backgroundColor:"white"
 },
 "Label": {
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
 	color: "#000"
-} 
+},
+"#usage": {
+	top: '10dp',
+	left: '10dp',
+	right: '10dp',
+	textAlign: 'center',
+},
+"#lungs": {
+	width: '150dp',
+	height: '150dp',
+	image: 'lungs.png'
+},
+"#rr": {
+	textAlign: 'center',
+	visible: false
+}

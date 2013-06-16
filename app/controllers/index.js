@@ -17,8 +17,48 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function doClick(e) {
-    alert($.label.text);
+var data = [];
+var sampleSize = 7;
+var sampleCount = 0;
+
+$.init = function() {
+	$.lungs.addEventListener('click', function(e) {
+		var matrix = Ti.UI.create2DMatrix()
+  		matrix = matrix.scale(1.5, 1.5);
+  		var ani = Ti.UI.createAnimation({
+    		transform : matrix,
+    		duration : 400,
+    		autoreverse : true,
+  		});
+  		$.lungs.animate(ani);
+
+  		data.push( Date.now().valueOf() );
+  		Ti.API.info( "Push timestamp: " + data[data.length-1]);
+
+  		sampleCount++;
+  		if (sampleCount >= sampleSize) {
+  			$.finalCalcFixedBreathsSample();
+  		}
+	});
+
+	$.MainWindow.open();
 }
 
-$.index.open();
+/*
+ * This calculates the RR based on a fixed number of breaths sample size
+ Questions:
+ Do we count the breath in the calculation, or does this just mark the start of
+ sampling
+ */
+$.finalCalcFixedBreathsSample = function() {
+	var timeElapsed = data[data.length-1] - data[0];
+	Ti.API.info("Elapsed time: " + timeElapsed);
+	Ti.API.info("data lenght " + data.length);
+	var rr = data.length / (timeElapsed / 60000);
+
+	$.rr.text = "Respiratory rate\n" + Math.round(rr);
+	$.lungs.opacity = 0.4;
+	$.rr.visible = true;
+}
+
+$.init();

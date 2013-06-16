@@ -30,3 +30,5 @@ Please use the [Wiki](https://github.com/ClinicalSoftwareSolutions/7breaths/wiki
 ## License
 
 The source is released under the GNU AFFERO GENERAL PUBLIC LICENSE so please fork, contribute and learn. The only thing you are not allowed to do with the source is compile and release into any App Store, either as a commercial product or free.
+
+Detail of the license can be found in the [LICENSE file](https://github.com/ClinicalSoftwareSolutions/7breaths/blob/master/LICENSE)

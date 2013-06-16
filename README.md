@@ -11,11 +11,11 @@ The initial idea was from Wai Keong on the NHS HackDay mailing list. To quote:
 
 The original idea was posted on the NHS HackDay mailing list and is on his blog
 
-[[http://wai2k.wordpress.com/2013/06/16/a-simple-app-for-counting-respiratory-rate/]]
+http://wai2k.wordpress.com/2013/06/16/a-simple-app-for-counting-respiratory-rate/
 
 The name "7Breaths" was suggested by Barry Rowlingson
 
-The initial mailing list discussion can be found on the Google groups pages [[https://groups.google.com/forum/?hl=en&fromgroups#!topic/nhshackday/ioOECJ3ZVEI]]
+The initial mailing list discussion can be found on the Google groups pages https://groups.google.com/forum/?hl=en&fromgroups#!topic/nhshackday/ioOECJ3ZVEI
 
 ## Discussion
 

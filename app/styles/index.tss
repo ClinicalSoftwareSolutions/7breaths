@@ -7,7 +7,7 @@
 	color: "#000"
 },
 "#usage": {
-	top: '10dp',
+	top: '20dp',
 	left: '10dp',
 	right: '10dp',
 	textAlign: 'center',
@@ -17,7 +17,23 @@
 	height: '150dp',
 	image: 'lungs.png'
 },
+"#progress": {
+	top: '70dp',
+	width: '250dp',
+	height: '28dp',
+	min: 0,
+	max: 7,
+	value: 0,
+	color: "#77f",
+	visible: true
+},
 "#rr": {
 	textAlign: 'center',
 	visible: false
+},
+"#resetbut": {
+	top: '20dp',
+	height: Ti.UI.SIZE,
+	width: '150dp',
+	title: 'Reset'
 }

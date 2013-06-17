@@ -22,6 +22,9 @@ var sampleSize = 7;
 var sampleCount = 0;
 
 $.init = function() {
+	$.progress.max = sampleSize;
+	$.resetbut.visible = false;
+
 	$.lungs.addEventListener('click', function(e) {
 		var matrix = Ti.UI.create2DMatrix()
   		matrix = matrix.scale(1.5, 1.5);
@@ -36,9 +39,23 @@ $.init = function() {
   		Ti.API.info( "Push timestamp: " + data[data.length-1]);
 
   		sampleCount++;
+  		$.progress.value = sampleCount;
+
   		if (sampleCount >= sampleSize) {
   			$.finalCalcFixedBreathsSample();
   		}
+	});
+
+	$.resetbut.addEventListener("click",function(e){
+		sampleCount = 0;
+		data = [];
+  		$.progress.value = 0;
+
+		$.lungs.opacity = 1.0;
+		$.rr.visible = false;
+		$.resetbut.visible = false;
+		$.progress.visible = true;
+		$.usage.visible = true;
 	});
 
 	$.MainWindow.open();
@@ -59,6 +76,9 @@ $.finalCalcFixedBreathsSample = function() {
 	$.rr.text = "Respiratory rate\n" + Math.round(rr);
 	$.lungs.opacity = 0.4;
 	$.rr.visible = true;
+	$.resetbut.visible = true;
+	$.progress.visible = false;
+	$.usage.visible = false;
 }
 
 $.init();

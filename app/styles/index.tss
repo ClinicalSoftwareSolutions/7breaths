@@ -1,6 +1,10 @@
 "#MainWindow": {
 	backgroundColor:"white"
 },
+"#MainWindow[platform=android]": {
+   navBarHidden: true,
+   exitOnClose: true
+},
 "Label": {
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
@@ -10,12 +14,16 @@
 	top: '20dp',
 	left: '10dp',
 	right: '10dp',
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'bold'
+	},
 	textAlign: 'center',
 },
 "#lungs": {
 	width: '150dp',
 	height: '150dp',
-	image: 'lungs.png'
+	image: '/lungs.png'
 },
 "#progress": {
 	top: '70dp',
@@ -29,6 +37,10 @@
 },
 "#rr": {
 	textAlign: 'center',
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'bold'
+	},
 	visible: false
 },
 "#resetbut": {

@@ -12,8 +12,8 @@
 },
 "#usage": {
 	top: '20dp',
-	left: '10dp',
-	right: '10dp',
+	left: '20dp',
+	right: '20dp',
 	font: {
 		fontSize: '16dp',
 		fontWeight: 'bold'

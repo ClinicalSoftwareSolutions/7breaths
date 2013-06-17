@@ -17,13 +17,17 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+var mode = 1;		// 0=fixed number, 1=minute, 2=2minutes etc
 var data = [];
 var sampleSize = 7;
-var sampleCount = 0;
+var count = 0;
+var timer = null;
 
+/*
+ * Init
+ */
 $.init = function() {
-	$.progress.max = sampleSize;
-	$.resetbut.visible = false;
+	$.progress.max = (0 === mode) ? sampleSize : 60 * mode;
 
 	$.lungs.addEventListener('click', function(e) {
 		var matrix = Ti.UI.create2DMatrix()
@@ -38,16 +42,29 @@ $.init = function() {
   		data.push( Date.now().valueOf() );
   		Ti.API.info( "Push timestamp: " + data[data.length-1]);
 
-  		sampleCount++;
-  		$.progress.value = sampleCount;
-
-  		if (sampleCount >= sampleSize) {
-  			$.finalCalcFixedBreathsSample();
+  		if(0 === mode) {
+			count++;
+  			$.progress.value = count;
+  			if (count >= sampleSize) {
+  				$.finalCalcFixedBreathsSample();
+  			}
+  		}
+  		else {
+  			// Start a timer one the first press
+  			if(0 === count) {
+  				timer = setInterval(function(){
+  					count++;
+  					$.progress.value = count;
+  					if (mode*60 === count) {
+  						$.finalCalcTimed();
+  					}
+  				},1000);
+  			}
   		}
 	});
 
 	$.resetbut.addEventListener("click",function(e){
-		sampleCount = 0;
+		count = 0;
 		data = [];
   		$.progress.value = 0;
 
@@ -73,12 +90,23 @@ $.finalCalcFixedBreathsSample = function() {
 	Ti.API.info("data lenght " + data.length);
 	var rr = data.length / (timeElapsed / 60000);
 
-	$.rr.text = "Respiratory rate\n" + Math.round(rr);
+	$.rr.text = "Respiratory rate\n" + Math.round(rr) + " breaths / min";
+	$.setUI2Results();
+}
+
+$.finalCalcTimed = function() {
+	clearInterval(timer);
+	timer = null;
+
+	$.rr.text = "Respiratory rate\n" + Math.round( data.length / mode )  + " breaths / min";
+	$.setUI2Results();
+}
+
+$.setUI2Results = function() {
 	$.lungs.opacity = 0.4;
 	$.rr.visible = true;
 	$.resetbut.visible = true;
 	$.progress.visible = false;
 	$.usage.visible = false;
 }
-
 $.init();

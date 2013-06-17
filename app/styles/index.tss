@@ -47,5 +47,6 @@
 	top: '20dp',
 	height: Ti.UI.SIZE,
 	width: '150dp',
-	title: 'Reset'
+	title: 'Reset',
+	visible: false
 }

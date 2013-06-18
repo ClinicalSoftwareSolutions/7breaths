@@ -49,4 +49,20 @@
 	width: '150dp',
 	title: 'Reset',
 	visible: false
+},
+"#mode": {
+	backgroundColor: 'transparent',
+	backgroundImage: '/dropdown_bg.png',
+	width: '230dp',
+	height: '45dp',
+	bottom: '5dp',
+	right: '5dp'
+},
+"#mode_lbl": {
+	font: {
+		fontSize: '14dp',
+		fontWeight: 'normal'
+	},
+	textAlign: 'left',
+	color: "#eee"
 }

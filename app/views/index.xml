@@ -5,5 +5,25 @@
 		<ProgressBar id="progress" />
 		<Label id="rr" />
 		<Button id="resetbut" />
+		<View id="mode">
+			<Label id="mode_lbl" />
+		</View>
+
+		<!-- This just declares the OptionDialog
+		use $.dlgMode.show() to show the dialog -->
+     <OptionDialog id="dlgMode" title="Select Mode" cancel="3">
+         <!-- The Options tag sets the options property. -->
+         <Options>
+             <Option>Sample over 7 breaths</Option>
+             <Option>Sample over 1 minute</Option>
+             <Option>Sample over 2 minutes</Option>
+             <Option>Cancel</Option>
+         </Options>
+
+         <!-- The ButtonNames tag sets the Android-only buttonNames property. -->
+         <ButtonNames>
+             <ButtonName>Set</ButtonName>
+         </ButtonNames>
+     </OptionDialog>
 	</Window>
 </Alloy>

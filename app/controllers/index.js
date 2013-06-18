@@ -27,7 +27,7 @@ var timer = null;
  * Init
  */
 $.init = function() {
-	$.progress.max = (0 === mode) ? sampleSize : 60 * mode;
+	$.setMode();
 
 	$.lungs.addEventListener('click', function(e) {
 		var matrix = Ti.UI.create2DMatrix()
@@ -61,6 +61,19 @@ $.init = function() {
   				},1000);
   			}
   		}
+	});
+
+	$.mode.addEventListener("click",function(e){
+		$.dlgMode.show();
+	});
+
+	$.dlgMode.addEventListener("click",function(e){
+		Ti.API.info("Option index = " + e.index);
+		//Ti.API.info("Cancel index = " + $.dlgMode.cancel);
+		if(e.index != $.dlgMode.cancel) {
+			mode = e.index;
+			$.setMode();
+		}
 	});
 
 	$.resetbut.addEventListener("click",function(e){
@@ -109,4 +122,18 @@ $.setUI2Results = function() {
 	$.progress.visible = false;
 	$.usage.visible = false;
 }
+
+$.setMode = function() {
+	$.progress.max = (0 === mode) ? sampleSize : 60 * mode;
+
+	if(0===mode) {
+		$.mode_lbl.text = "Mode: Sample 7 breaths";
+	}
+	else {
+		$.mode_lbl.text = "Mode: Sample over "+ mode +" min(s)";
+	}
+}
+/*
+ *
+ */
 $.init();

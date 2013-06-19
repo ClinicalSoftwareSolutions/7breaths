@@ -23,6 +23,11 @@ var sampleSize = 7;
 var count = 0;
 var timer = null;
 
+Ti.include('stackmob.cfg.js');
+StackMob = require('ti.stackmob')({
+					publicKey : stackmob_api_key,
+					secure : true
+				});
 /*
  * Init
  */

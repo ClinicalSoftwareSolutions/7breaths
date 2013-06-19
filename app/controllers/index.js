@@ -68,9 +68,13 @@ $.init = function() {
 	});
 
 	$.dlgMode.addEventListener("click",function(e){
+		if(OS_ANDROID) {
+			if(e.button) {		// The only button defined is cancel
+				e.index = -1;
+			}
+		}
 		Ti.API.info("Option index = " + e.index);
-		//Ti.API.info("Cancel index = " + $.dlgMode.cancel);
-		if(e.index != $.dlgMode.cancel) {
+		if(e.index != $.dlgMode.cancel && e.index != -1) {
 			mode = e.index;
 			$.setMode();
 		}

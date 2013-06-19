@@ -17,12 +17,12 @@
              <Option>Sample over 7 breaths</Option>
              <Option>Sample over 1 minute</Option>
              <Option>Sample over 2 minutes</Option>
-             <Option>Cancel</Option>
+             <Option platform="ios">Cancel</Option>
          </Options>
 
          <!-- The ButtonNames tag sets the Android-only buttonNames property. -->
          <ButtonNames>
-             <ButtonName>Set</ButtonName>
+             <ButtonName>Cancel</ButtonName>
          </ButtonNames>
      </OptionDialog>
 	</Window>

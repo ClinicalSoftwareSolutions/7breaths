@@ -6,3 +6,4 @@ npm-debug.log
 tmp
 .map
 Resources
+app/assets/stackmob.cfg.js

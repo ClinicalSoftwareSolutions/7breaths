@@ -35,6 +35,13 @@
 	color: "#77f",
 	visible: true
 },
+"#abort": {
+	top: '90dp',
+	height: Ti.UI.SIZE,
+	width: '150dp',
+	title: 'Abort',
+	visible: false
+},
 "#rr": {
 	textAlign: 'center',
 	font: {

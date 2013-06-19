@@ -128,15 +128,16 @@ $.finalCalcTimed = function() {
 $.sendData = function() {
 	// Create new instance of Todo
 	var rr = new _RR({
-	  fixed_or_timed: (mode>0) ? 'timed' : 'fixed',
-	  fixed_or_timed_value: (mode>0) ? mode : 7,
-	  data: data
+		device: Ti.Platform.id,
+		fixed_or_timed: (mode>0) ? 'timed' : 'fixed',
+		fixed_or_timed_value: (mode>0) ? mode : 7,
+		data: data
 	});
 
 	// Persist the object to StackMob
 	rr.create({
-  		success: function(model, result, options) { console.debug(model.toJSON()); },
-  		error: function(model, error, options) {}
+  		success: function(model, result, options) { Ti.API.debug(model.toJSON()); },
+  		error: function(model, error, options) { Ti.API.debug(error); }
 	});
 }
 

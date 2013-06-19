@@ -51,6 +51,7 @@ $.init = function() {
   			$.progress.value = count;
   			if (count >= sampleSize) {
   				$.finalCalcFixedBreathsSample();
+				$.sendData();
   			}
   		}
   		else {
@@ -61,6 +62,7 @@ $.init = function() {
   					$.progress.value = count;
   					if (mode*60 === count) {
   						$.finalCalcTimed();
+						$.sendData();
   					}
   				},1000);
   			}

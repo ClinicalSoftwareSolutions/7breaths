@@ -26,9 +26,9 @@
 	image: '/lungs.png'
 },
 "#progress": {
-	top: '70dp',
+	top: '65dp',
 	width: '250dp',
-	height: '28dp',
+	height: Ti.UI.SIZE,
 	min: 0,
 	max: 7,
 	value: 0,

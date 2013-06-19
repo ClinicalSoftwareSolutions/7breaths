@@ -97,6 +97,7 @@ $.init = function() {
 			timer = null;
 		}
 		$.reset();
+		$.abort.visible = false;
 	});
 
 	$.MainWindow.open();

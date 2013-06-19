@@ -24,10 +24,9 @@ var count = 0;
 var timer = null;
 
 Ti.include('stackmob.cfg.js');
-StackMob = require('ti.stackmob')({
-					publicKey : stackmob_api_key,
-					secure : true
-				});
+StackMob = require('ti.stackmob')({ publicKey : stackmob_api_key, secure : true });
+var _RR = StackMob.Model.extend({ schemaName: 'rr' });
+
 /*
  * Init
  */
@@ -122,6 +121,21 @@ $.finalCalcTimed = function() {
 
 	$.rr.text = "Respiratory rate\n" + Math.round( data.length / mode )  + " breaths / min";
 	$.setUI2Results();
+}
+
+$.sendData = function() {
+	// Create new instance of Todo
+	var rr = new _RR({
+	  fixed_or_timed: (mode>0) ? 'timed' : 'fixed',
+	  fixed_or_timed_value: (mode>0) ? mode : 7,
+	  data: data
+	});
+
+	// Persist the object to StackMob
+	rr.create({
+  		success: function(model, result, options) { console.debug(model.toJSON()); },
+  		error: function(model, error, options) {}
+	});
 }
 
 $.setUI2Results = function() {

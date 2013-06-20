@@ -35,7 +35,7 @@ $.init = function() {
 
 	$.lungs.addEventListener('click', function(e) {
 		var matrix = Ti.UI.create2DMatrix()
-  		matrix = matrix.scale(1.5, 1.5);
+  		matrix = matrix.scale(1.4, 1.4);
   		var ani = Ti.UI.createAnimation({
     		transform : matrix,
     		duration : 400,

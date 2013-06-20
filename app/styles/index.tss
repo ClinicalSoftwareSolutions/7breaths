@@ -26,7 +26,7 @@
 	image: '/lungs.png'
 },
 "#progress": {
-	top: '65dp',
+	top: '68dp',
 	width: '250dp',
 	height: Ti.UI.SIZE,
 	min: 0,
@@ -36,7 +36,7 @@
 	visible: true
 },
 "#abort": {
-	top: '90dp',
+	top: '92dp',
 	height: Ti.UI.SIZE,
 	width: '150dp',
 	title: 'Abort',

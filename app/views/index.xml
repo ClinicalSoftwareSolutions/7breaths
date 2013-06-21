@@ -3,7 +3,7 @@
 		<Label id="usage">Tap the lungs each time you see the chest wall rise</Label>
 		<ImageView id="lungs" />
 		<ProgressBar id="progress" />
-        <Button id="abort" />
+        <Button id="abortbut" />
 		<Label id="rr" />
 		<Button id="resetbut" />
 		<View id="mode">

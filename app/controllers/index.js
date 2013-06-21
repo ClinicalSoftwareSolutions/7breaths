@@ -47,7 +47,7 @@ $.init = function() {
   		Ti.API.info( "Push timestamp: " + data[data.length-1]);
 
   		if(0 === count) {
-  			$.abort.visible = true;
+  			$.abortbut.visible = true;
   		}
 
   		if(0 === mode) {
@@ -85,24 +85,36 @@ $.init = function() {
 		}
 		Ti.API.info("Option index = " + e.index);
 		if(e.index != $.dlgMode.cancel && e.index != -1) {
+			$.abort();
 			mode = e.index;
 			$.setMode();
 		}
 	});
 
 	$.resetbut.addEventListener("click", $.reset);
-	$.abort.addEventListener("click", function(e){
-  		if(mode>0) {
-			clearInterval(timer);
-			timer = null;
-		}
-		$.reset();
-		$.abort.visible = false;
+
+	$.abortbut.addEventListener("click", function(e){
+		$.abort();
+		$.abortbut.visible = false;
 	});
 
 	$.MainWindow.open();
 }
 
+/*
+ * Abort a count
+ */
+$.abort = function() {
+	if(mode>0) {
+		clearInterval(timer);
+		timer = null;
+	}
+	$.reset();
+}
+
+/*
+ * Reset the UI to starting layout
+ */
 $.reset = function() {
 	count = 0;
 	data = [];
@@ -111,6 +123,7 @@ $.reset = function() {
 	$.lungs.opacity = 1.0;
 	$.rr.visible = false;
 	$.resetbut.visible = false;
+	$.abortbut.visible = false;
 	$.progress.visible = true;
 	$.usage.visible = true;
 }
@@ -157,7 +170,7 @@ $.sendData = function() {
 $.setUI2Results = function() {
 	$.lungs.opacity = 0.4;
 	$.rr.visible = true;
-	$.abort.visible = false;
+	$.abortbut.visible = false;
 	$.resetbut.visible = true;
 	$.progress.visible = false;
 	$.usage.visible = false;

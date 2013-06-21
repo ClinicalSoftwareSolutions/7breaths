@@ -35,8 +35,8 @@
 	color: "#77f",
 	visible: true
 },
-"#abort": {
-	top: '92dp',
+"#abortbut": {
+	top: '90dp',
 	height: Ti.UI.SIZE,
 	width: '150dp',
 	title: 'Abort',

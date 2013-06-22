@@ -19,7 +19,8 @@ A [Stackmob account](https://www.stackmob.com/) is also required and is free to 
 
 The rr schema needs to have the following fields:
 
-|===|===|
+| | |
+|---|---|
 |data| array[integer] |
 |device|	string |
 |fixed_or_timed| string |

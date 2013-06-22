@@ -39,4 +39,8 @@ Please use the [Wiki](https://github.com/ClinicalSoftwareSolutions/7breaths/wiki
 
 The source is released under the GNU AFFERO GENERAL PUBLIC LICENSE so please fork, contribute and learn. The only thing you are not allowed to do with the source is compile and release into any App Store, either as a commercial product or free.
 
-Detail of the license can be found in the [LICENSE file](https://github.com/ClinicalSoftwareSolutions/7breaths/blob/master/LICENSE)
+Detail of the license can be found in the
+[LICENSE file](https://github.com/ClinicalSoftwareSolutions/7breaths/blob/master/LICENSE)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

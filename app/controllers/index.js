@@ -30,6 +30,9 @@ var sampleSize = 7;
 var count = 0;
 var timer = null;
 
+$.dlgConfirmSend = null;
+
+// Include the StackMob stuff
 Ti.include('/stackmob.cfg.js');
 StackMob = require('ti.stackmob')({ publicKey : stackmob_api_key, secure : true });
 var _RR = StackMob.Model.extend({ schemaName: 'rr' });
@@ -39,6 +42,29 @@ var _RR = StackMob.Model.extend({ schemaName: 'rr' });
  */
 $.init = function() {
 	$.setMode();
+
+	$.dlgConfirmSend = Ti.UI.createAlertDialog({
+   	cancel: 1, ok: 0,
+   	buttonNames: ['Real Patient', 'Just Testing'],
+   	message: 'Please confirm the patient type',
+   	title: 'Person Type'
+  	});
+
+	$.dlgConfirmSend.addEventListener('click', function(e){
+  		if (e.index === e.source.cancel){
+  			var testDataCount = Ti.App.Properties.getInt("APP:TestDataCount",0) + 1;
+  			var realDataCount = Ti.App.Properties.getInt("APP:RealDataCount",0);
+      	Ti.App.Properties.setInt("APP:TestDataCount", testDataCount)
+      	Ti.Analytics.featureEvent('app:TestData', {real: realDataCount, test: testDataCount});
+    	}
+    	else {
+  			var testDataCount = Ti.App.Properties.getInt("APP:TestDataCount",0);
+  			var realDataCount = Ti.App.Properties.getInt("APP:RealDataCount",0) + 1;
+      	Ti.App.Properties.setInt("APP:RealDataCount", realDataCount)
+      	Ti.Analytics.featureEvent('app:RealData', {real: realDataCount, test: testDataCount});
+    		$.sendDataConfirmed();
+    	}
+  	});
 
 	$.lungs.addEventListener('click', function(e) {
 		var matrix = Ti.UI.create2DMatrix()
@@ -84,6 +110,10 @@ $.init = function() {
 		$.dlgMode.show();
 	});
 
+	$.progress.addEventListener("click",function(e){
+		$.dlgMode.show();
+	});
+
 	$.dlgMode.addEventListener("click",function(e){
 		if(OS_ANDROID) {
 			if(e.button) {		// The only button defined is cancel
@@ -107,8 +137,7 @@ $.init = function() {
 
 	$.MainWindow.open();
 
-	var tandc_done = Ti.App.Properties.getInt("APP:TandC_ACCEPTED",0);
-	if (0 === tandc_done) {
+	if (!Ti.App.Properties.getBool("APP:TandC_ACCEPTED", false)) {
 		var tandc = Alloy.createController("tandc", {}).getView();
 		// Open on top of the mainwindow
 		tandc.open();
@@ -167,7 +196,10 @@ $.finalCalcTimed = function() {
 }
 
 $.sendData = function() {
-	// Create new instance of Todo
+	$.dlgConfirmSend.show();
+}
+
+$.sendDataConfirmed = function() {
 	var rr = new _RR({
 		device: Ti.Platform.id,
 		fixed_or_timed: (mode>0) ? 'timed' : 'fixed',
@@ -196,9 +228,11 @@ $.setMode = function() {
 
 	if(0===mode) {
 		$.mode_lbl.text = "Mode: Sample 7 breaths";
+		$.progress.message = "Mode: Sample 7 breaths";
 	}
 	else {
 		$.mode_lbl.text = "Mode: Sample over "+ mode +" min(s)";
+		$.progress.message = "Mode: Sample over "+ mode +" min(s)";
 	}
 }
 /*

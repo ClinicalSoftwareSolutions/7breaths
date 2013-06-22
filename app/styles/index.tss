@@ -10,6 +10,9 @@
 	height: Ti.UI.SIZE,
 	color: "#000"
 },
+"Button[platform=ios]": {
+	style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
+},
 "#usage": {
 	top: '20dp',
 	left: '20dp',
@@ -27,19 +30,26 @@
 },
 "#progress": {
 	bottom: '90dp',
-	width: '250dp',
+	width: '90%',
 	height: Ti.UI.SIZE,
 	min: 0,
 	max: 7,
 	value: 0,
-	color: "#77f",
+	color: "#22F",
+	font: {fontSize:'14dp', fontWeight:'normal'},
 	visible: true
 },
 "#abortbut": {
 	top: '90dp',
-	height: Ti.UI.SIZE,
+	height: '42dp',
 	width: '150dp',
 	title: 'Abort',
+	borderRadius: 4,
+	backgroundGradient:{
+      type:'linear',
+      colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
+      backFillStart: false
+   },
 	visible: false
 },
 "#rr": {
@@ -52,12 +62,19 @@
 },
 "#resetbut": {
 	top: '20dp',
-	height: Ti.UI.SIZE,
+	height: '42dp',
 	width: '150dp',
 	title: 'Reset',
+	borderRadius: 4,
+	backgroundGradient:{
+      type:'linear',
+      colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
+      backFillStart: false
+   },
 	visible: false
 },
 "#mode": {
+	visible: false,
 	backgroundColor: 'transparent',
 	backgroundImage: '/dropdown_bg.png',
 	width: '230dp',

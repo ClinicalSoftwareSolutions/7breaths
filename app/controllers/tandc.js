@@ -25,6 +25,7 @@ if(OS_ANDROID){
 }
 
 var ARGS = arguments[0] || {};
+$.reachedBottom = false;
 
 $.init = function() {
     var htmlfile = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "/tandc.html");
@@ -41,18 +42,25 @@ $.init = function() {
     Ti.API.info("Styledlabel height="+$.styledlabel.getHeight());
 
     $.ScrollWrapper.addEventListener("scroll",function(_event) {
-        Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
-        if(_event > 2100) { // Hard coded as no good cross platform way to detect the bottom of scroll view
+        //Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
+        if(_event.y > 2100) { // Hard coded as no good cross platform way to detect the bottom of scroll view
             $.reachedBottom = true;
         }
     });
 
     $.accept_but.addEventListener("click",function(e){
-        Ti.App.Properties.setInt("APP:TandC_ACCEPTED",1);
+        if ($.reachedBottom === false) {
+            Ti.Analytics.featureEvent('app:Tried_TandC_Accepted');
+            alert("Please read all the Terms and Conditions before accepting them. Thank you.")
+            return;
+        }
+        Ti.Analytics.featureEvent('app:TandC_Accepted');
+        Ti.App.Properties.setBool("APP:TandC_ACCEPTED", true);
         $.Window.close();
     });
 
     $.reject_but.addEventListener("click",function(e){
+        Ti.Analytics.featureEvent('app:TandC_Rejected');
         alert("Thank you for your interest in 7Breaths. As the terms are not acceptable please un-install the application.")
     });
 }

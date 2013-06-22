@@ -1,3 +1,21 @@
-".container": {
+"#Window": {
 	backgroundColor: "white"
+},
+"#ScrollWrapper": {
+	top: '5dp',
+	left: '5dp',
+	right: '5dp',
+	bottom: '30dp'
+},
+"#accept_but": {
+	title: 'Accept',
+	left: '20dp',
+	width: '150dp',
+	bottom: '5dp'
+},
+"#reject_but": {
+	title: 'Reject',
+	right: '20dp',
+	width: '150dp',
+	bottom: '5dp'
 }

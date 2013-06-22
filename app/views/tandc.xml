@@ -1,7 +1,9 @@
 <Alloy>
-	<Window id="TandCWindow">
-   	<ScrollView id="Wrapper">
+	<Window id="Window">
+   	<ScrollView id="ScrollWrapper">
 			<Module id="styledlabel" module="ti.styledlabel" method="createLabel" />
    	</ScrollView>
+   	<Button id="accept_but" />
+   	<Button id="reject_but" />
    </Window>
 </Alloy>

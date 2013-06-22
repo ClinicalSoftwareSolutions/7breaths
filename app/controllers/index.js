@@ -17,6 +17,13 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+var APP = Alloy.Globals.APP;
+
+if(OS_ANDROID){
+    Alloy = require("alloy")
+    _ = require("alloy/underscore")._
+}
+
 var mode = 1;		// 0=fixed number, 1=minute, 2=2minutes etc
 var data = [];
 var sampleSize = 7;
@@ -99,6 +106,14 @@ $.init = function() {
 	});
 
 	$.MainWindow.open();
+
+	var tandc_done = Ti.App.Properties.getInt("APP:TandC_ACCEPTED",0);
+	if (0 === tandc_done) {
+		var tandc = Alloy.createController("tandc", {}}).getView();
+		// Open on top of the mainwindow
+		tandc.open();
+	}
+
 }
 
 /*

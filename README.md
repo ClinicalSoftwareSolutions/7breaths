@@ -15,6 +15,16 @@ The initial mailing list discussion can be found on the Google groups pages http
 
 The application has been built using the [Appcelerator Framework](http://www.appcelerator.com/developers/) and the Alloy compoment. Installation instructions and how to build appcelerator source is all on their website.
 
+A [Stackmob account](https://www.stackmob.com/) is also required and is free to sign up to. Create a new app on Stackmob and then create a new Schema called rr. Edit the app/assets/stackmob.cfg file with the API key and then rename it to a .js extension.
+
+The rr schema needs to have the following fields:
+
+|===|===|
+|data| array[integer] |
+|device|	string |
+|fixed_or_timed| string |
+|fixed_or_timed_value| float |
+
 ## Discussion
 
 Please use the [Wiki](https://github.com/ClinicalSoftwareSolutions/7breaths/wiki) to contribute to [development ideas](https://github.com/ClinicalSoftwareSolutions/7breaths/wiki/Initial-ideas-for-app) and to see things like the roadmap

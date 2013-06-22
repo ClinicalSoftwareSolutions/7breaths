@@ -1,0 +1,7 @@
+<Alloy>
+	<Window id="TandCWindow">
+   	<ScrollView id="Wrapper">
+			<Module id="styledlabel" module="ti.styledlabel" method="createLabel" />
+   	</ScrollView>
+   </Window>
+</Alloy>

@@ -36,8 +36,24 @@ $.init = function() {
         //this.close();
     });
 
+    Ti.API.info("ScrollWrapper height="+$.ScrollWrapper.getHeight());
+    Ti.API.info("ScrollWrapper contentHeight="+$.ScrollWrapper.getContentHeight());
+    Ti.API.info("Styledlabel height="+$.styledlabel.getHeight());
+
     $.ScrollWrapper.addEventListener("scroll",function(_event) {
         Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
+        if(_event > 2100) { // Hard coded as no good cross platform way to detect the bottom of scroll view
+            $.reachedBottom = true;
+        }
+    });
+
+    $.accept_but.addEventListener("click",function(e){
+        Ti.App.Properties.setInt("APP:TandC_ACCEPTED",1);
+        $.Window.close();
+    });
+
+    $.reject_but.addEventListener("click",function(e){
+        alert("Thank you for your interest in 7Breaths. As the terms are not acceptable please un-install the application.")
     });
 }
 

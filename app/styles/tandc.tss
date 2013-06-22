@@ -5,17 +5,23 @@
 	top: '5dp',
 	left: '5dp',
 	right: '5dp',
-	bottom: '30dp'
+	bottom: '52dp'
+},
+"#styledlabel": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
 },
 "#accept_but": {
 	title: 'Accept',
 	left: '20dp',
-	width: '150dp',
+	width: '120dp',
+	height: '42dp',
 	bottom: '5dp'
 },
 "#reject_but": {
 	title: 'Reject',
 	right: '20dp',
-	width: '150dp',
+	width: '120dp',
+	height: '42dp',
 	bottom: '5dp'
 }

@@ -36,7 +36,7 @@ $.init = function() {
         //this.close();
     });
 
-    $.ScrollWrapper.addEventListener(scroll,function(_event) {
+    $.ScrollWrapper.addEventListener("scroll",function(_event) {
         Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
     });
 }

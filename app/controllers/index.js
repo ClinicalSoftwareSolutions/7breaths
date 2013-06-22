@@ -109,7 +109,7 @@ $.init = function() {
 
 	var tandc_done = Ti.App.Properties.getInt("APP:TandC_ACCEPTED",0);
 	if (0 === tandc_done) {
-		var tandc = Alloy.createController("tandc", {}}).getView();
+		var tandc = Alloy.createController("tandc", {}).getView();
 		// Open on top of the mainwindow
 		tandc.open();
 	}

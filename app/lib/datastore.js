@@ -16,7 +16,7 @@ exports.init = function() {
 		', mode INTEGER NOT NULL' +
 		', data_json STRING NOT NULL' +
 		');');
-
+	db.file.setRemoteBackup(false);
 	db.close();
 	db = null;
 
@@ -28,7 +28,7 @@ exports.init = function() {
 	Ti.Network.addEventListener("change",function(_event){
 		if(_networkOnline === false && _event.online === true) {
 			// Network as become available
-			_sendPendingData();
+			 	_sendPendingData();
 		}
 		_networkOnline = _event.online;
 	});
@@ -80,10 +80,9 @@ _sendPendingData = function() {
 
 	var db = Titanium.Database.open('rr_data');
 	var rows = db.execute("SELECT * FROM tblEvents LIMIT 1");
-	db.close();
-	db = null;
 
 	if(rows.isValidRow()) {
+		Ti.API.debug("Got a valid row: Count=" + rows.rowCount);
 		var event_id = rows.fieldByName('event_id');
 		var mode = rows.fieldByName('mode');
 		var data = JSON.parse(rows.fieldByName('data_json'));
@@ -98,7 +97,7 @@ _sendPendingData = function() {
 		// Send it
 		rr.create({
 	  		success: function(model, result, options) {
-	  			Ti.API.debug(model.toJSON());
+	  			Ti.API.debug("SB success: Model = " + model.toJSON());
 
 				var db = Titanium.Database.open('rr_data');
 				var rows = db.execute("DELETE FROM tblEvents WHERE event_id=?", event_id);
@@ -115,4 +114,6 @@ _sendPendingData = function() {
 	}
 
 	rows.close();
+	db.close();
+	db = null;
 }

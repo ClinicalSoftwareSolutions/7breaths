@@ -147,7 +147,6 @@ $.init = function() {
 		// Open on top of the mainwindow
 		tandc.open();
 	}
-
 }
 
 /*

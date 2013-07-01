@@ -7,18 +7,31 @@ Ti.include('/stackmob.cfg.js');
 StackMob = require('ti.stackmob')({ publicKey : stackmob_api_key, secure : true });
 var _RR = StackMob.Model.extend({ schemaName: 'rr' });
 
-var _db = null;
+var _networkOnline = false;
 
 exports.init = function() {
 	var db = Titanium.Database.open('rr_data');
 	db.execute('CREATE TABLE IF NOT EXISTS tblEvents (' +
 		'event_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT' +
-		', mode INTEGER NOT NULL'
+		', mode INTEGER NOT NULL' +
 		', data_json STRING NOT NULL' +
 		');');
 
 	db.close();
 	db = null;
+
+	_networkOnline = Ti.Network.online;
+
+	// Send any pending events
+	_sendPendingData();
+
+	Ti.Network.addEventListener("change",function(_event){
+		if(_networkOnline === false && _event.online === true) {
+			// Network as become available
+			_sendPendingData();
+		}
+		_networkOnline = _event.online;
+	});
 }
 
 exports.storeData = function(_mode, _data) {

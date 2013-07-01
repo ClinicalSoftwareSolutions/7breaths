@@ -16,7 +16,9 @@ exports.init = function() {
 		', mode INTEGER NOT NULL' +
 		', data_json STRING NOT NULL' +
 		');');
-	db.file.setRemoteBackup(false);
+	if(OS_IOS) {
+		db.file.setRemoteBackup(false);
+	}
 	db.close();
 	db = null;
 

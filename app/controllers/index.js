@@ -39,10 +39,8 @@ var timer = null;
 
 $.dlgConfirmSend = null;
 
-// Include the StackMob stuff
-Ti.include('/stackmob.cfg.js');
-StackMob = require('ti.stackmob')({ publicKey : stackmob_api_key, secure : true });
-var _RR = StackMob.Model.extend({ schemaName: 'rr' });
+var dataStore = require('datastore');
+dataStore.init();
 
 /*
  * Init
@@ -207,18 +205,7 @@ $.sendData = function() {
 }
 
 $.sendDataConfirmed = function() {
-	var rr = new _RR({
-		device: Ti.Platform.id,
-		fixed_or_timed: (mode>0) ? 'timed' : 'fixed',
-		fixed_or_timed_value: (mode>0) ? mode : 7,
-		data: data
-	});
-
-	// Persist the object to StackMob
-	rr.create({
-  		success: function(model, result, options) { Ti.API.debug(model.toJSON()); },
-  		error: function(model, error, options) { Ti.API.debug(error); }
-	});
+	dataStore.storeData(mode, data);
 }
 
 $.setUI2Results = function() {

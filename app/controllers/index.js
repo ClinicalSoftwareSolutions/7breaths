@@ -206,7 +206,7 @@ $.sendData = function() {
 }
 
 $.sendDataConfirmed = function() {
-	dataStore.storeData(mode, data);
+	dataStore.storeData(mode, data, respRate);
 }
 
 $.setUI2Results = function() {

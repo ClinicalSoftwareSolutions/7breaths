@@ -36,6 +36,7 @@ var data = [];
 var sampleSize = 7;
 var count = 0;
 var timer = null;
+var respRate = 0;
 
 $.dlgConfirmSend = null;
 
@@ -185,9 +186,9 @@ $.finalCalcFixedBreathsSample = function() {
 	var timeElapsed = data[data.length-1] - data[0];
 	Ti.API.info("Elapsed time: " + timeElapsed);
 	Ti.API.info("data lenght " + data.length);
-	var rr = data.length / (timeElapsed / 60000);
+	respRate = Math.round( (data.length / (timeElapsed / 60000)) );
 
-	$.rr.text = "Respiratory rate\n" + Math.round(rr) + " breaths / min";
+	$.rr.text = "Respiratory rate\n" + respRate + " breaths / min";
 	$.setUI2Results();
 }
 
@@ -195,7 +196,8 @@ $.finalCalcTimed = function() {
 	clearInterval(timer);
 	timer = null;
 
-	$.rr.text = "Respiratory rate\n" + Math.round( data.length / mode )  + " breaths / min";
+	respRate = Math.round( data.length / mode );
+	$.rr.text = "Respiratory rate\n" + respRate  + " breaths / min";
 	$.setUI2Results();
 }
 

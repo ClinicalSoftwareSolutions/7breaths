@@ -15,6 +15,7 @@ exports.init = function() {
 		'event_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT' +
 		', mode INTEGER NOT NULL' +
 		', data_json STRING NOT NULL' +
+		', displayedRR INTEGER NOT NULL' +
 		');');
 	if(OS_IOS) {
 		db.file.setRemoteBackup(false);
@@ -36,19 +37,20 @@ exports.init = function() {
 	});
 }
 
-exports.storeData = function(_mode, _data) {
+exports.storeData = function(_mode, _data, _rr) {
 
 	// If we not connected, no point even trying to send to StackMob
 	if(!Ti.Network.online) {
-		_storeInDb(_mode, _data);
+		_storeInDb(_mode, _data, _rr);
 		return;
 	}
 
 	var rr = new _RR({
 		device: Ti.Platform.id,
-		fixed_or_timed: (mode>0) ? 'timed' : 'fixed',
-		fixed_or_timed_value: (mode>0) ? mode : 7,
-		data: _data
+		fixed_or_timed: (_mode>0) ? 'timed' : 'fixed',
+		fixed_or_timed_value: (_mode>0) ? _mode : 7,
+		data: _data,
+		displayedRR: _rr
 	});
 
 	// Persist the object to StackMob
@@ -67,9 +69,12 @@ exports.storeData = function(_mode, _data) {
 
 }
 
-_storeInDb = function(_mode, _data) {
+_storeInDb = function(_mode, _data, _rr) {
 	var db = Titanium.Database.open('rr_data');
-	db.execute("INSERT INTO tblEvents (mode, data_json) VALUES(?,?);", _mode, JSON.stringify(_data,null,0) );
+	db.execute("INSERT INTO tblEvents (mode, data_json, displayedRR) VALUES(?,?,?);"
+		, _mode
+		, JSON.stringify(_data,null,0)
+		, _rr );
 	db.close();
 	db = null;
 	Ti.API.debug("Event data stored in DB for sending later.");
@@ -88,12 +93,14 @@ _sendPendingData = function() {
 		var event_id = rows.fieldByName('event_id');
 		var mode = rows.fieldByName('mode');
 		var data = JSON.parse(rows.fieldByName('data_json'));
+		var respRate = JSON.parse(rows.fieldByName('displayedRR'));
 
 		var rr = new _RR({
 			device: Ti.Platform.id,
 			fixed_or_timed: (mode>0) ? 'timed' : 'fixed',
 			fixed_or_timed_value: (mode>0) ? mode : 7,
-			data: data
+			data: data,
+			displayedRR: respRate
 		});
 
 		// Send it

@@ -9,7 +9,7 @@ var _RR = StackMob.Model.extend({ schemaName: 'rr' });
 
 var _networkOnline = false;
 
-exports.init = function() {
+exports.init = function(_args) {
 	var db = Titanium.Database.open('rr_data');
 	db.execute('CREATE TABLE IF NOT EXISTS tblEvents (' +
 		'event_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT' +
@@ -36,6 +36,22 @@ exports.init = function() {
 		}
 		_networkOnline = _event.online;
 	});
+
+	if(OS_IOS){
+		Ti.App.addEventListener('resumed', function(e){
+			Ti.API.debug("iOS resume");
+			_sendPendingData();
+		});
+	}
+
+	if(OS_ANDROID){
+		if (_args.activity !== undefined){
+			_args.activity.addEventListener("resume",function(_e){
+				Ti.API.debug("Android resume");
+				_sendPendingData();
+			});
+		}
+	}
 }
 
 exports.storeData = function(_realPerson, _mode, _data, _rr) {

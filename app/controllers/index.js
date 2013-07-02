@@ -42,7 +42,6 @@ var realPerson = false;
 $.dlgConfirmSend = null;
 
 var dataStore = require('datastore');
-dataStore.init();
 
 /*
  * Init
@@ -154,6 +153,20 @@ $.init = function() {
 		var tandc = Alloy.createController("tandc", {}).getView();
 		// Open on top of the mainwindow
 		tandc.open();
+	}
+
+	if(OS_ANDROID){
+		$.MainWindow.addEventListener('open', function() {
+			// Activity is only present once window open
+      	if (!$.MainWindow.activityListenerLoaded) {
+            var activity = $.MainWindow.activity;
+            $.MainWindow.activityListenerLoaded = true;
+        		dataStore.init({activity: activity});
+        	}
+    	});
+	}
+	else {
+		dataStore.init({activity: undefined});
 	}
 }
 

@@ -5,7 +5,8 @@
 	top: '5dp',
 	left: '5dp',
 	right: '5dp',
-	bottom: '52dp'
+	bottom: '52dp',
+	layout: 'vertical'
 },
 "#styledlabel": {
 	height: Ti.UI.SIZE,

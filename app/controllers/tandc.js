@@ -34,6 +34,7 @@ if(OS_ANDROID){
 
 var ARGS = arguments[0] || {};
 $.reachedBottom = false;
+$.scrollBottomY = 0;
 
 $.init = function() {
     var htmlfile = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "/tandc.html");
@@ -45,16 +46,12 @@ $.init = function() {
         //this.close();
     });
 
-    Ti.API.info("ScrollWrapper height="+$.ScrollWrapper.getHeight());
-    Ti.API.info("ScrollWrapper contentHeight="+$.ScrollWrapper.getContentHeight());
-    Ti.API.info("Styledlabel height="+$.styledlabel.getHeight());
-
-    $.ScrollWrapper.addEventListener("scroll",function(_event) {
-        //Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
-        if(_event.y > 2100) { // Hard coded as no good cross platform way to detect the bottom of scroll view
-            $.reachedBottom = true;
-        }
+    $.styledlabel.addEventListener("postlayout",function(e){
+        $.scrollBottomY = e.source.getRect().height - $.ScrollWrapper.getSize().height;
+        Ti.API.debug("Set $.scrollBottomY = " + $.scrollBottomY);
     });
+
+    $.ScrollWrapper.addEventListener("scroll",$.scrollWrapper_ScrollEvent);
 
     $.accept_but.addEventListener("click",function(e){
         if ($.reachedBottom === false) {
@@ -73,4 +70,21 @@ $.init = function() {
     });
 }
 
+$.scrollWrapper_ScrollEvent = function(_event) {
+    Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
+    if( $.isScrollBottom(_event.y) ) {
+        Ti.API.info("ScrollView reached the bottom.");
+        $.reachedBottom = true;
+        // Don't need to listen anymore
+        $.ScrollWrapper.removeEventListener("scroll",$.scrollWrapper_ScrollEvent);
+    }
+}
+
+$.isScrollBottom = function(_y) {
+    return ( (_y >= ($.scrollBottomY-25)) ? true : false );
+}
+
+/*
+ * Bootstrap
+ */
 $.init();

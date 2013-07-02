@@ -16,6 +16,7 @@ exports.init = function() {
 		', mode INTEGER NOT NULL' +
 		', data_json STRING NOT NULL' +
 		', displayedRR INTEGER NOT NULL' +
+		', realPerson BOOLEAN NOT NULL' +
 		');');
 	if(OS_IOS) {
 		db.file.setRemoteBackup(false);
@@ -37,11 +38,11 @@ exports.init = function() {
 	});
 }
 
-exports.storeData = function(_mode, _data, _rr) {
+exports.storeData = function(_realPerson, _mode, _data, _rr) {
 
 	// If we not connected, no point even trying to send to StackMob
 	if(!Ti.Network.online) {
-		_storeInDb(_mode, _data, _rr);
+		_storeInDb(_realPerson, _mode, _data, _rr);
 		return;
 	}
 
@@ -63,18 +64,20 @@ exports.storeData = function(_mode, _data, _rr) {
   		error: function(model, error, options) {
   			Ti.API.debug(error);
   			// Store in database
-  			_storeInDb(_mode, _data);
+  			_storeInDb(_realPerson, _mode, _data, _rr);
   		}
 	});
 
 }
 
-_storeInDb = function(_mode, _data, _rr) {
+_storeInDb = function(_realPerson, _mode, _data, _rr) {
 	var db = Titanium.Database.open('rr_data');
-	db.execute("INSERT INTO tblEvents (mode, data_json, displayedRR) VALUES(?,?,?);"
+	db.execute("INSERT INTO tblEvents (mode, data_json, displayedRR, realPerson) VALUES(?,?,?,?);"
 		, _mode
 		, JSON.stringify(_data,null,0)
-		, _rr );
+		, _rr
+		, ( ((_realPerson)?1:0) )
+		);
 	db.close();
 	db = null;
 	Ti.API.debug("Event data stored in DB for sending later.");

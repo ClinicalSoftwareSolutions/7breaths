@@ -37,6 +37,7 @@ var sampleSize = 7;
 var count = 0;
 var timer = null;
 var respRate = 0;
+var realPerson = false;
 
 $.dlgConfirmSend = null;
 
@@ -51,19 +52,23 @@ $.init = function() {
 
 	$.dlgConfirmSend = Ti.UI.createAlertDialog({
    	cancel: 1, ok: 0,
-   	buttonNames: ['Real Patient', 'Just Testing'],
-   	message: 'Please confirm the patient type',
-   	title: 'Person Type'
+   	buttonNames: ['Real Person', 'Just Testing'],
+   	message: 'Please tell us if this data was collected for testing or a real person.',
+   	title: 'Type of Person'
   	});
 
 	$.dlgConfirmSend.addEventListener('click', function(e){
   		if (e.index === e.source.cancel){
+  			realPerson = false;
   			var testDataCount = Ti.App.Properties.getInt("APP:TestDataCount",0) + 1;
   			var realDataCount = Ti.App.Properties.getInt("APP:RealDataCount",0);
       	Ti.App.Properties.setInt("APP:TestDataCount", testDataCount)
       	Ti.Analytics.featureEvent('app:TestData', {real: realDataCount, test: testDataCount});
+    		// Un-comment to send test data too
+    		//$.sendDataConfirmed();
     	}
     	else {
+  			realPerson = true;
   			var testDataCount = Ti.App.Properties.getInt("APP:TestDataCount",0);
   			var realDataCount = Ti.App.Properties.getInt("APP:RealDataCount",0) + 1;
       	Ti.App.Properties.setInt("APP:RealDataCount", realDataCount)
@@ -141,8 +146,10 @@ $.init = function() {
 		$.abortbut.visible = false;
 	});
 
+	// Open the main window
 	$.MainWindow.open();
 
+	// Show T&C on top if they haven't been accepted
 	if (!Ti.App.Properties.getBool("APP:TandC_ACCEPTED", false)) {
 		var tandc = Alloy.createController("tandc", {}).getView();
 		// Open on top of the mainwindow
@@ -206,7 +213,7 @@ $.sendData = function() {
 }
 
 $.sendDataConfirmed = function() {
-	dataStore.storeData(mode, data, respRate);
+	dataStore.storeData(realPerson, mode, data, respRate);
 }
 
 $.setUI2Results = function() {

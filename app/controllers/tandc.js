@@ -42,7 +42,7 @@ $.init = function() {
     $.styledlabel.html = html;
 
     Ti.App.addEventListener("androidback" , function() {
-        // TODO don't allow close unless ok or cancel selected, i.e. prevent normal back button behavior
+        // TODO don't allow close unless ok or cancel selected, i.e. prevent normal back button behaviour
         //this.close();
     });
 
@@ -56,7 +56,7 @@ $.init = function() {
     $.accept_but.addEventListener("click",function(e){
         if ($.reachedBottom === false) {
             Ti.Analytics.featureEvent('app:Tried_TandC_Accepted');
-            alert("Please read all the Terms and Conditions before accepting them. Thank you.")
+            alert("Please scroll down through all the Terms and Conditions before accepting them. Thank you.")
             return;
         }
         Ti.Analytics.featureEvent('app:TandC_Accepted');
@@ -75,7 +75,7 @@ $.scrollWrapper_ScrollEvent = function(_event) {
     if( $.isScrollBottom(_event.y) ) {
         Ti.API.info("ScrollView reached the bottom.");
         $.reachedBottom = true;
-        // Don't need to listen anymore
+        // Don't need to listen any more
         $.ScrollWrapper.removeEventListener("scroll",$.scrollWrapper_ScrollEvent);
     }
 }

@@ -1,7 +1,7 @@
 /*
     7Breaths
     An application to simplify the clinical measurement of a person's respiratory rate
-   Copyright (C) 2013  Neville Dastur neville [at] clinsoftsolutions.com
+    Copyright (C) 2013  Neville Dastur neville [at] clinsoftsolutions.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by

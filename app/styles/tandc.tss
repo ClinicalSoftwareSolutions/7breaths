@@ -2,11 +2,24 @@
 	backgroundColor: "white"
 },
 "#ScrollWrapper": {
-	top: '5dp',
+	top: '45dp',
 	left: '5dp',
 	right: '5dp',
 	bottom: '52dp',
 },
+".navbar": {
+	top: 0,
+	left: '0dp',
+	right: '0dp',
+	height: '42dp',
+	width: '100%',
+	borderRadius: 0,
+	backgroundGradient:{
+      type:'linear',
+      colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
+      backFillStart: false
+   },
+}
 "#styledlabel": {
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
@@ -14,29 +27,57 @@
 "Button[platform=ios]": {
 	style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
 },
-"#accept_but": {
-	title: 'Accept',
+".actionButton": {
 	borderRadius: 4,
 	backgroundGradient:{
       type:'linear',
       colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
       backFillStart: false
-   },
-   left: '20dp',
-	width: '120dp',
+   	},
+  	width: '120dp',
 	height: '42dp',
+},
+"#accept_but": {
+ 	left: '20dp',
 	bottom: '5dp'
 },
 "#reject_but": {
-	title: 'Reject',
-	borderRadius: 4,
-	backgroundGradient:{
-      type:'linear',
-      colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
-      backFillStart: false
-   },
 	right: '20dp',
-	width: '120dp',
-	height: '42dp',
 	bottom: '5dp'
+},
+"#RegFormWrapper": {
+	top: '43dp',
+	left: 0,
+	layout: 'vertical'
+},
+".fieldRow": {
+	top: '10dp',
+	left: 0,
+	height: Ti.UI.SIZE,
+	width: '100%'
+},
+".fieldLabel": {
+	font: {
+		fontSize: '14dp',
+		fontWeight: 'bold'
+	},
+	textAlign: 'right',
+	left: '10dp',
+	width: '80dp',
+	height: Ti.UI.SIZE,
+},
+".fieldInput":{
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	color: '#336699',
+	right: '10dp',
+	width: '210dp',
+},
+"#reg_info": {
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'normal'
+	},
+	textAlign: 'center',
+	left: '10dp',
+	right: '10dp'	
 }

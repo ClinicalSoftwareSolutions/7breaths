@@ -41,6 +41,9 @@ $.init = function() {
     var html = htmlfile.read().text;
     $.styledlabel.html = html;
 
+    $.reg_info.text = "Registration is entirely optional, but allows us to better"
+    + " understand the data collected and also allows us to feedback to you.";
+
     Ti.App.addEventListener("androidback" , function() {
         // TODO don't allow close unless ok or cancel selected, i.e. prevent normal back button behaviour
         //this.close();
@@ -59,19 +62,27 @@ $.init = function() {
             alert("Please scroll down through all the Terms and Conditions before accepting them. Thank you.")
             return;
         }
-        Ti.Analytics.featureEvent('app:TandC_Accepted');
+        Ti.Analytics.featureEvent("APP:TandC_ACCEPTED");
         Ti.App.Properties.setBool("APP:TandC_ACCEPTED", true);
-        $.Window.close();
+        //$.Window.close();
+        $.scrollableView.setCurrentPage(1);
     });
 
     $.reject_but.addEventListener("click",function(e){
         Ti.Analytics.featureEvent('app:TandC_Rejected');
         alert("Thank you for your interest in 7Breaths. As the terms are not acceptable please un-install the application.")
     });
+
+
+    // If T&C already accepted then go straight to registration page
+    if (Ti.App.Properties.getBool("APP:TandC_ACCEPTED", false)) {
+        $.scrollableView.setCurrentPage(1);
+    }
+
 }
 
 $.scrollWrapper_ScrollEvent = function(_event) {
-    Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
+    //Ti.API.info("Scroll x="+_event.x+" y="+_event.y);
     if( $.isScrollBottom(_event.y) ) {
         Ti.API.info("ScrollView reached the bottom.");
         $.reachedBottom = true;

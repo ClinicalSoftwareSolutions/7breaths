@@ -1,9 +1,41 @@
 <Alloy>
 	<Window id="Window">
-   	<ScrollView id="ScrollWrapper">
-			<Module id="styledlabel" module="ti.styledlabel" method="createLabel" />
-   	</ScrollView>
-   	<Button id="accept_but" />
-   	<Button id="reject_but" />
+		<ScrollableView id="scrollableView" showPagingControl="false" scrollingEnabled="false">
+         <View id="page_tandc">
+				<View id="NavbarWrapperTC" class="navbar">
+					<Label class="NavHeader" text="Terms of Use" />
+				</View>
+		   	<ScrollView id="ScrollWrapper">
+					<Module id="styledlabel" module="ti.styledlabel" method="createLabel" />
+		   	</ScrollView>
+		   	<Button id="accept_but" class="actionButton" title="Accept" />
+		   	<Button id="reject_but" class="actionButton" title="Reject" />
+         </View>
+         <View id="page_registration">
+				<View id="NavbarWrapperTC" class="navbar">
+					<Label class="NavHeader" text="User Registration" />
+				</View>
+				<View id="RegFormWrapper">
+					<View class="fieldRow">
+						<Label class="fieldLabel" text="First name" />
+						<TextField class="fieldInput" />
+					</View>
+					<View class="fieldRow">
+						<Label class="fieldLabel" text="Surname" />
+						<TextField class="fieldInput" />
+					</View>
+					<View class="fieldRow">
+						<Label class="fieldLabel" text="Email" />
+						<TextField class="fieldInput" />
+					</View>
+					<View class="fieldRow">
+						<Label class="fieldLabel" text="Role" />
+					</View>
+					<Label id="reg_info" />
+			   	<Button id="accept_but" class="actionButton" title="Skip" />
+			   	<Button id="reject_but" class="actionButton" title="Register" />
+				</View>
+         </View>
+      </ScrollableView>
    </Window>
 </Alloy>

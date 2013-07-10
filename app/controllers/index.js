@@ -149,7 +149,7 @@ $.init = function() {
 	$.MainWindow.open();
 
 	// Show T&C on top if they haven't been accepted
-	if (!Ti.App.Properties.getBool("APP:TandC_ACCEPTED", false)) {
+	if (!Ti.App.Properties.getBool("APP:INIT_DONE", false)) {
 		var tandc = Alloy.createController("tandc", {}).getView();
 		// Open on top of the mainwindow
 		tandc.open();

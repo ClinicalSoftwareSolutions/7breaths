@@ -18,23 +18,42 @@
 				<View id="RegFormWrapper">
 					<View class="fieldRow">
 						<Label class="fieldLabel" text="First name" />
-						<TextField class="fieldInput" />
+						<TextField id="reg_firstname" class="fieldInput" />
 					</View>
 					<View class="fieldRow">
 						<Label class="fieldLabel" text="Surname" />
-						<TextField class="fieldInput" />
+						<TextField id="reg_surname" class="fieldInput" />
 					</View>
 					<View class="fieldRow">
 						<Label class="fieldLabel" text="Email" />
-						<TextField class="fieldInput" />
+						<TextField id="reg_email" class="fieldInput" />
 					</View>
 					<View class="fieldRow">
 						<Label class="fieldLabel" text="Role" />
+						<View id="rolePicker" class="dropdown">
+							<Label class="dropdownLabel" text="Please choose one ..." />
+						</View>
 					</View>
 					<Label id="reg_info" />
-			   	<Button id="accept_but" class="actionButton" title="Skip" />
-			   	<Button id="reject_but" class="actionButton" title="Register" />
 				</View>
+		   	<Button id="skip_but" class="actionButton" title="Skip" />
+		   	<Button id="register_but" class="actionButton" title="Register" />
+		   	
+		   	<!-- Picker for the user role -->
+		   	<View id="rolePickerWrapper" visible="false">
+			   	<Picker id="rolePickerControl" bottom="48dp" selectionIndicator="true" useSpinner="true" >
+	            	<PickerColumn id="role">
+	                <PickerRow title="Ward Nursing Staff" />
+	                <PickerRow title="ICU/HDU Nursing Staff" />
+	                <PickerRow title="Hospital Nursing Assistant" />
+	                <PickerRow title="Hospital Medical Staff" />
+	                <PickerRow title="Community Nursing Staff" />
+	                <PickerRow title="Community Medical Staff" />
+	            	</PickerColumn>
+	        		</Picker>
+			   	<Button id="cancel_role_but" class="actionButton" title="Cancel" />
+			   	<Button id="select_role_but" class="actionButton" title="Select" />
+        		</View>
          </View>
       </ScrollableView>
    </Window>

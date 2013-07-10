@@ -36,15 +36,32 @@
    	},
   	width: '120dp',
 	height: '42dp',
+	bottom: '5dp',
+	color: '#111',
 },
 "#accept_but": {
  	left: '20dp',
-	bottom: '5dp'
 },
 "#reject_but": {
 	right: '20dp',
-	bottom: '5dp'
 },
+"#register_but": {
+	right: '20dp',
+},
+"#skip_but": {
+	left: '20dp',
+},
+"#cancel_role_but": {
+	left: '20dp',
+	backgroundGradient:{
+      type:'linear',
+      colors:[{color:'#efc4c4',position:0.0},{color:'#efb4b4',position:0.50},{color:'#efa4a4',position:1.0}],
+      backFillStart: false
+   	},
+}
+"#select_role_but": {
+	right: '20dp',
+}
 "#RegFormWrapper": {
 	top: '43dp',
 	left: 0,
@@ -71,13 +88,36 @@
 	color: '#336699',
 	right: '10dp',
 	width: '210dp',
+	height: '40dp',
 },
+".dropdown": {
+	borderRadius: 4,
+	backgroundGradient:{
+      type:'linear',
+      colors:[{color:'#c4c4c4',position:0.0},{color:'#b4b4b4',position:0.50},{color:'#a4a4a4',position:1.0}],
+      backFillStart: false
+   	},
+	right: '10dp',
+	width: '210dp',
+	height: '40dp',
+},
+".dropdownLabel": {
+	color: '#336699',
+	left: '5dp',
+	height: '36dp',
+}
 "#reg_info": {
 	font: {
 		fontSize: '16dp',
 		fontWeight: 'normal'
 	},
 	textAlign: 'center',
+	top: '10dp',
 	left: '10dp',
 	right: '10dp'	
+}
+"#rolePickerWrapper": {
+	width: '100%',
+	height: '100%',
+	backgroundColor: "transparent",
 }

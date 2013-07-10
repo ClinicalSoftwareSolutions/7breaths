@@ -42,7 +42,7 @@ $.init = function() {
     $.styledlabel.html = html;
 
     $.reg_info.text = "Registration is entirely optional, but allows us to better"
-    + " understand the data collected and also allows us to feedback to you.";
+    + " understand the data collected and also allows us send feedback to you.";
 
     Ti.App.addEventListener("androidback" , function() {
         // TODO don't allow close unless ok or cancel selected, i.e. prevent normal back button behaviour
@@ -58,7 +58,7 @@ $.init = function() {
 
     $.accept_but.addEventListener("click",function(e){
         if ($.reachedBottom === false) {
-            Ti.Analytics.featureEvent('app:Tried_TandC_Accepted');
+            Ti.Analytics.featureEvent('APP:Tried_TandC_Accepted');
             alert("Please scroll down through all the Terms and Conditions before accepting them. Thank you.")
             return;
         }
@@ -69,10 +69,25 @@ $.init = function() {
     });
 
     $.reject_but.addEventListener("click",function(e){
-        Ti.Analytics.featureEvent('app:TandC_Rejected');
+        Ti.Analytics.featureEvent('APP:TandC_Rejected');
         alert("Thank you for your interest in 7Breaths. As the terms are not acceptable please un-install the application.")
     });
 
+    $.rolePickerWrapper.addEventListener("click",function(e){
+        Ti.API.debug("rolePickerWrapper click")
+        $.rolePickerWrapper.visible = false;
+    });
+
+    $.rolePicker.addEventListener("click", function(e){
+        $.reg_firstname.blur();
+        $.reg_surname.blur();
+        $.reg_email.blur();
+        $.rolePickerWrapper.visible = true;
+    });
+
+    $.rolePickerControl.addEventListener("change",function(e){
+        Ti.API.debug("Click on picker row: " + e.row.title);
+    });
 
     // If T&C already accepted then go straight to registration page
     if (Ti.App.Properties.getBool("APP:TandC_ACCEPTED", false)) {

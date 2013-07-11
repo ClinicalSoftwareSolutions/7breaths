@@ -1,30 +1,38 @@
 <Alloy>
 	<Window id="MainWindow">
-		<Label id="usage">Tap the lungs each time you see the chest wall rise</Label>
-		<ImageView id="lungs" />
-		<ProgressBar id="progress" />
+        <View id="NavbarWrapperTC" class="navbar">
+            <Label class="NavHeader" text="7 Breaths" />
         <Button id="abortbut" />
+        <Button id="resetbut" />
+        </View>
+
+		<Label id="usage">Tap the lungs each time you see the chest wall rise</Label>
+
+		<ImageView id="lungs" />
+
+		<ProgressBar id="progress" />
+
 		<Label id="rr" />
-		<Button id="resetbut" />
+
 		<View id="mode">
 			<Label id="mode_lbl" />
 		</View>
 
 		<!-- This just declares the OptionDialog
 		use $.dlgMode.show() to show the dialog -->
-     <OptionDialog id="dlgMode" title="Select Mode" cancel="3">
-         <!-- The Options tag sets the options property. -->
-         <Options>
+        <OptionDialog id="dlgMode" title="Select Mode" cancel="3">
+            <!-- The Options tag sets the options property. -->
+            <Options>
              <Option>Sample over 7 breaths</Option>
              <Option>Sample over 1 minute</Option>
              <Option>Sample over 2 minutes</Option>
              <Option platform="ios">Cancel</Option>
-         </Options>
+            </Options>
 
-         <!-- The ButtonNames tag sets the Android-only buttonNames property. -->
-         <ButtonNames>
+            <!-- The ButtonNames tag sets the Android-only buttonNames property. -->
+            <ButtonNames>
              <ButtonName>Cancel</ButtonName>
-         </ButtonNames>
-     </OptionDialog>
+            </ButtonNames>
+        </OptionDialog>
 	</Window>
 </Alloy>

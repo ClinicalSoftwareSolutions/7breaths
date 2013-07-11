@@ -5,20 +5,52 @@
    navBarHidden: true,
    exitOnClose: true
 },
+".navbar": {
+	top: 0,
+	left: '0dp',
+	right: '0dp',
+	height: '42dp',
+	width: '100%',
+	borderRadius: 0,
+	backgroundGradient:{
+      type:'linear',
+      colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
+      backFillStart: false
+   },
+}
 "Label": {
-	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
 	color: "#000"
 },
+"Button": {
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'normal'
+	},
+	borderRadius: 4,
+	backgroundGradient:{
+      type:'linear',
+      colors:[{color:'#b3b3fa',position:0.0},{color:'#a3a3fa',position:0.50},{color:'#9393fa',position:1.0}],
+      backFillStart: false
+   },
+  	height: '34dp',
+},
+".NavHeader": {
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'bold'
+	},
+	textAlign: 'center',	
+}
 "Button[platform=ios]": {
 	style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
 },
 "#usage": {
-	top: '20dp',
+	top: '50dp',
 	left: '20dp',
 	right: '20dp',
 	font: {
-		fontSize: '16dp',
+		fontSize: '14dp',
 		fontWeight: 'bold'
 	},
 	textAlign: 'center',
@@ -40,16 +72,17 @@
 	visible: true
 },
 "#abortbut": {
-	top: '90dp',
-	height: '42dp',
-	width: '150dp',
+	top: '4dp',
+	right: '10dp',
+	width: '90dp',
 	title: 'Abort',
-	borderRadius: 4,
-	backgroundGradient:{
-      type:'linear',
-      colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
-      backFillStart: false
-   },
+	visible: false
+},
+"#resetbut": {
+	top: '4dp',
+	left: '10dp',
+	width: '90dp',
+	title: 'Reset',
 	visible: false
 },
 "#rr": {
@@ -58,19 +91,6 @@
 		fontSize: '16dp',
 		fontWeight: 'bold'
 	},
-	visible: false
-},
-"#resetbut": {
-	top: '20dp',
-	height: '42dp',
-	width: '150dp',
-	title: 'Reset',
-	borderRadius: 4,
-	backgroundGradient:{
-      type:'linear',
-      colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}],
-      backFillStart: false
-   },
 	visible: false
 },
 "#mode": {

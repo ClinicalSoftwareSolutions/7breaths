@@ -142,26 +142,17 @@ $.Validates = function() {
         
         msg += "All fields require a value please.\n";
 
-        if ( $.reg_email.value.length < 5) {
-            $.reg_email.borderColor = "#f00";
-        }
-        if ( $.reg_firstname.value.length < 5) {
-            $.reg_firstname.borderColor = "#f00";
-        }
-        if ( $.reg_surname.value.length < 5) {
-            $.reg_surname.borderColor = "#f00";
-        }
-        if ($.roleLabel.text === $.DEFAULT_ROLE_TEXT) {
-            $.rolePicker.borderColor = "#f00";
-        }
+        $.reg_email.borderColor = ( $.reg_email.value.length < 5) ? "#f00" : 'transparent';
+        $.reg_firstname.borderColor = ( $.reg_firstname.value.length < 5) ? "#f00" : 'transparent';
+        $.reg_surname.borderColor = ( $.reg_surname.value.length < 5) ? "#f00" : 'transparent';
+        $.rolePicker.borderColor = ($.roleLabel.text === $.DEFAULT_ROLE_TEXT) ? "#f00" : 'transparent';
+        
     }
 
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;    
  
-    if($.reg_email.value.length >= 5 && reg.test($.reg_email.value) == false) {
-        msg += "The email address appears to be invalid. Please correct";
-        $.reg_email.borderColor = "#f00";
-    }
+    $.reg_email.borderColor = ($.reg_email.value.length >= 5 && reg.test($.reg_email.value) == false)
+        ? (msg += "The email address appears to be invalid. Please correct", "#f00") : 'transparent';
 
     return msg;
 }

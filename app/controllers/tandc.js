@@ -135,7 +135,11 @@ $.init = function() {
  */
 $.Validates = function() {
     var msg = "";
-    if ( $.reg_email.value.length < 5, $.reg_firstname.value.length < 2, $.reg_surname.value.length < 2) {
+    if ( $.reg_email.value.length < 5
+        || $.reg_firstname.value.length < 2 
+        || $.reg_surname.value.length < 2
+        || $.roleLabel.text === $.DEFAULT_ROLE_TEXT) {
+        
         msg += "All fields require a value please.\n";
 
         if ( $.reg_email.value.length < 5) {
@@ -147,10 +151,9 @@ $.Validates = function() {
         if ( $.reg_surname.value.length < 5) {
             $.reg_surname.borderColor = "#f00";
         }
-    }
-
-    if ($.roleLabel.text === $.DEFAULT_ROLE_TEXT) {
-        msg += "Please select a role.\n";
+        if ($.roleLabel.text === $.DEFAULT_ROLE_TEXT) {
+            $.rolePicker.borderColor = "#f00";
+        }
     }
 
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;    

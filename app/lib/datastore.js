@@ -53,13 +53,21 @@ exports.init = function(_args) {
 
 	_networkOnline = Ti.Network.online;
 
+	// If sending user reg failed try sending on init
+	if( Ti.App.Properties.hasProperty("APP:RegisteredUserPending") ) {
+		_RegisterPendingUser();
+	}
+
 	// Send any pending events
 	_sendPendingData();
 
 	Ti.Network.addEventListener("change",function(_event){
 		if(_networkOnline === false && _event.online === true) {
+			if( Ti.App.Properties.hasProperty("APP:RegisteredUserPending") ) {
+				_RegisterPendingUser();
+			}
 			// Network as become available
-			 	_sendPendingData();
+			_sendPendingData();
 		}
 		_networkOnline = _event.online;
 	});
@@ -114,19 +122,42 @@ exports.storeData = function(_realPerson, _mode, _data, _rr) {
 }
 
 exports.RegisterUser = function(_email, _firstname, _surname, _role) {
-	var user = new StackMob.User({
+	// Make an object so that on error we can save easily for retry
+	var userObj = {
 		username: _email,
 		device: Ti.Platform.id,
 		password: Ti.Utils.sha1(_email),	// not interested in a true password
 		firstname: _firstname,
 		surname: _surname,
 		role: _role
-	});
+	};
+	var user = new StackMob.User(userObj);
 
 	user.create({
   		success: function(model, result, options) {
   			Ti.Analytics.featureEvent("APP:UserRegistered");
         	Ti.App.Properties.setString("APP:RegisteredUser", _email);
+  		},
+  		error: function(model, result, options) {
+			Ti.Analytics.featureEvent("APP:UserRegistrationError");
+        	Ti.App.Properties.setString("APP:RegisteredUserPending", JSON.stringify(userObj,null,0));
+  		}
+	});
+}
+
+_RegisterPendingUser = function() {
+	if( !Ti.App.Properties.hasProperty("APP:RegisteredUserPending") ) {
+		return;
+	}
+	
+	var userObj = JSON.parse(Ti.App.Properties.getString("APP:RegisteredUserPending"));
+	var user = new StackMob.User(userObj);
+
+	user.create({
+  		success: function(model, result, options) {
+  			Ti.Analytics.featureEvent("APP:UserRegistered");
+        	Ti.App.Properties.setString("APP:RegisteredUser", userObj.email);
+        	Ti.App.Properties.removeProperty("APP:RegisteredUserPending");
   		},
   		error: function(model, result, options) {
 			Ti.Analytics.featureEvent("APP:UserRegistrationError");

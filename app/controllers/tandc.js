@@ -70,7 +70,6 @@ $.init = function() {
         }
         Ti.Analytics.featureEvent("APP:TandC_ACCEPTED");
         Ti.App.Properties.setBool("APP:TandC_ACCEPTED", true);
-        //$.Window.close();
         $.scrollableView.setCurrentPage(1);
     });
 
@@ -105,6 +104,7 @@ $.init = function() {
         if(0 === validate_msg.length) {
             dataStore.RegisterUser(reg_email.value, reg_firstname.value, reg_surname.value,
                 $.roleLabel.text);
+            $.Window.close();
         }
         else {
             alert(validate_msg);
@@ -119,6 +119,7 @@ $.init = function() {
             // and with increasing intervals
             Ti.App.Properties.setInt("APP:REG_COUNTDOWN", _skipCount * 2);
         }
+        $.Window.close();
     });
 
     // If T&C already accepted then go straight to registration page

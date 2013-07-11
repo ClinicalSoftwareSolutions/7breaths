@@ -111,6 +111,16 @@ $.init = function() {
         }
     });
 
+    $.skip_but.addEventListener("click",function(e){
+        var _skipCount = Ti.App.Properties.getInt("APP:REG_SKIP_COUNT", 0) + 1;
+        Ti.App.Properties.setInt("APP:REG_SKIP_COUNT", _skipCount);
+        if (_skipCount < 3) {
+            // We only prompt the user twice for registration if skipped
+            // and with increasing intervals
+            Ti.App.Properties.setInt("APP:REG_COUNTDOWN", _skipCount * 2);
+        }
+    });
+
     // If T&C already accepted then go straight to registration page
     if (Ti.App.Properties.getBool("APP:TandC_ACCEPTED", false)) {
         $.scrollableView.setCurrentPage(1);

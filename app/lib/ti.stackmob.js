@@ -17,7 +17,7 @@ var _ = require('alloy/underscore'),
 var TiStackMob = function(options) {
 
 	// need to convert this to requires
-	Ti.include("stackmob-0.9.2-min.js");
+	Ti.include("stackmob-js-0.9.2-min.js");
 
 	StackMob.Storage = {
 

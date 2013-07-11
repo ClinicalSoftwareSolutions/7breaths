@@ -62,6 +62,7 @@ $.init = function() {
 
     $.ScrollWrapper.addEventListener("scroll",$.scrollWrapper_ScrollEvent);
 
+    // Terms accepted
     $.accept_but.addEventListener("click",function(e){
         if ($.reachedBottom === false) {
             Ti.Analytics.featureEvent('APP:Tried_TandC_Accepted');
@@ -73,16 +74,19 @@ $.init = function() {
         $.scrollableView.setCurrentPage(1);
     });
 
+    // Terms rejected
     $.reject_but.addEventListener("click",function(e){
         Ti.Analytics.featureEvent('APP:TandC_Rejected');
         alert("Thank you for your interest in 7Breaths. As the terms are not acceptable please un-install the application.")
     });
 
+    // Close picker if there is a click outside of the picker control
     $.rolePickerWrapper.addEventListener("click",function(e){
         Ti.API.debug("rolePickerWrapper click")
         $.rolePickerWrapper.visible = false;
     });
 
+    // Open the role picker
     $.rolePicker.addEventListener("click", function(e){
         $.reg_firstname.blur();
         $.reg_surname.blur();
@@ -90,20 +94,23 @@ $.init = function() {
         $.rolePickerWrapper.visible = true;
     });
 
-    $.rolePickerControl.addEventListener("change",function(e){
-        Ti.API.debug("Click on picker row: " + e.row.title);
-    });
+    // $.rolePickerControl.addEventListener("change",function(e){
+    //     Ti.API.debug("Click on picker row: " + e.row.title);
+    // });
 
+    // Set label if a new role is selected
     $.select_role_but.addEventListener("click",function(e){
         Ti.API.debug("Picker row selected: " + $.rolePickerControl.getSelectedRow(0).title);
         $.roleLabel.text = $.rolePickerControl.getSelectedRow(0).title;
     });
 
+    // User registers
     $.register_but.addEventListener("click",function(e){
         var validate_msg = $.Validates();
         if(0 === validate_msg.length) {
             dataStore.RegisterUser(reg_email.value, reg_firstname.value, reg_surname.value,
                 $.roleLabel.text);
+            Ti.App.Properties.setBool("APP:INIT_DONE", true);
             $.Window.close();
         }
         else {
@@ -111,6 +118,7 @@ $.init = function() {
         }
     });
 
+    // User declines registration
     $.skip_but.addEventListener("click",function(e){
         var _skipCount = Ti.App.Properties.getInt("APP:REG_SKIP_COUNT", 0) + 1;
         Ti.App.Properties.setInt("APP:REG_SKIP_COUNT", _skipCount);
@@ -119,6 +127,7 @@ $.init = function() {
             // and with increasing intervals
             Ti.App.Properties.setInt("APP:REG_COUNTDOWN", _skipCount * 2);
         }
+        Ti.App.Properties.setBool("APP:INIT_DONE", true);
         $.Window.close();
     });
 

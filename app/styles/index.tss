@@ -30,7 +30,7 @@
 	borderRadius: 4,
 	backgroundGradient:{
       type:'linear',
-      colors:[{color:'#b3b3fa',position:0.0},{color:'#a3a3fa',position:0.50},{color:'#9393fa',position:1.0}],
+      colors:[{color:'#a3a3fa',position:0.0},{color:'#9393fa',position:0.50},{color:'#8383fa',position:1.0}],
       backFillStart: false
    },
   	height: '34dp',
@@ -73,14 +73,14 @@
 },
 "#abortbut": {
 	top: '4dp',
-	right: '10dp',
+	right: '5dp',
 	width: '90dp',
 	title: 'Abort',
 	visible: false
 },
 "#resetbut": {
 	top: '4dp',
-	left: '10dp',
+	left: '5dp',
 	width: '90dp',
 	title: 'Reset',
 	visible: false

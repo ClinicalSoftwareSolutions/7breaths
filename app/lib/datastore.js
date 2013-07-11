@@ -113,6 +113,27 @@ exports.storeData = function(_realPerson, _mode, _data, _rr) {
 
 }
 
+exports.RegisterUser = function(_email, _firstname, _surname, _role) {
+	var user = new StackMob.User({
+		username: _email,
+		device: Ti.Platform.id,
+		password: Ti.Utils.sha1(_email),	// not interested in a true password
+		firstname: _firstname,
+		surname: _surname,
+		role: _role
+	});
+
+	user.create({
+  		success: function(model, result, options) {
+  			Ti.Analytics.featureEvent("APP:UserRegistered");
+        	Ti.App.Properties.setString("APP:RegisteredUser", _email);
+  		},
+  		error: function(model, result, options) {
+			Ti.Analytics.featureEvent("APP:UserRegistrationError");
+  		}
+	});
+}
+
 _storeInDb = function(_realPerson, _mode, _data, _rr) {
 	var db = Titanium.Database.open('rr_data');
 	db.execute("INSERT INTO tblEvents (mode, data_json, displayedRR, realPerson) VALUES(?,?,?,?);"

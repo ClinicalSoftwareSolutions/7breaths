@@ -32,6 +32,10 @@ if(OS_ANDROID){
     _ = require("alloy/underscore")._
 }
 
+$.DEFAULT_ROLE_TEXT = "Please choose one ...";
+
+var dataStore = require('datastore');
+
 var ARGS = arguments[0] || {};
 $.reachedBottom = false;
 $.scrollBottomY = 0;
@@ -40,6 +44,8 @@ $.init = function() {
     var htmlfile = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "/tandc.html");
     var html = htmlfile.read().text;
     $.styledlabel.html = html;
+
+    $.roleLabel.text = $.DEFAULT_ROLE_TEXT;
 
     $.reg_info.text = "Registration is entirely optional, but allows us to better"
     + " understand the data collected and also allows us send feedback to you.";
@@ -89,11 +95,61 @@ $.init = function() {
         Ti.API.debug("Click on picker row: " + e.row.title);
     });
 
+    $.select_role_but.addEventListener("click",function(e){
+        Ti.API.debug("Picker row selected: " + $.rolePickerControl.getSelectedRow(0).title);
+        $.roleLabel.text = $.rolePickerControl.getSelectedRow(0).title;
+    });
+
+    $.register_but.addEventListener("click",function(e){
+        var validate_msg = $.Validates();
+        if(0 === validate_msg.length) {
+            dataStore.RegisterUser(reg_email.value, reg_firstname.value, reg_surname.value,
+                $.roleLabel.text);
+        }
+        else {
+            alert(validate_msg);
+        }
+    });
+
     // If T&C already accepted then go straight to registration page
     if (Ti.App.Properties.getBool("APP:TandC_ACCEPTED", false)) {
         $.scrollableView.setCurrentPage(1);
     }
 
+}
+
+/**
+ * Validate the fields
+ * If fails then returns a message. So emmpty string indicates success
+ */
+$.Validates = function() {
+    var msg = "";
+    if ( $.reg_email.value.length < 5, $.reg_firstname.value.length < 2, $.reg_surname.value.length < 2) {
+        msg += "All fields require a value please.\n";
+
+        if ( $.reg_email.value.length < 5) {
+            $.reg_email.borderColor = "#f00";
+        }
+        if ( $.reg_firstname.value.length < 5) {
+            $.reg_firstname.borderColor = "#f00";
+        }
+        if ( $.reg_surname.value.length < 5) {
+            $.reg_surname.borderColor = "#f00";
+        }
+    }
+
+    if ($.roleLabel.text === $.DEFAULT_ROLE_TEXT) {
+        msg += "Please select a role.\n";
+    }
+
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;    
+ 
+    if($.reg_email.value.length >= 5 && reg.test($.reg_email.value) == false) {
+        msg += "The email address appears to be invalid. Please correct";
+        $.reg_email.borderColor = "#f00";
+    }
+
+    return msg;
 }
 
 $.scrollWrapper_ScrollEvent = function(_event) {

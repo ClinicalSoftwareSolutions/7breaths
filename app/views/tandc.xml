@@ -31,7 +31,7 @@
 					<View class="fieldRow">
 						<Label class="fieldLabel" text="Role" />
 						<View id="rolePicker" class="dropdown">
-							<Label class="dropdownLabel" text="Please choose one ..." />
+							<Label class="dropdownLabel" id="roleLabel" />
 						</View>
 					</View>
 					<Label id="reg_info" />
@@ -49,6 +49,8 @@
 	                <PickerRow title="Hospital Medical Staff" />
 	                <PickerRow title="Community Nursing Staff" />
 	                <PickerRow title="Community Medical Staff" />
+	                <PickerRow title="Not in healthcare" />
+	                <PickerRow title="Other healthcare" />
 	            	</PickerColumn>
 	        		</Picker>
 			   	<Button id="cancel_role_but" class="actionButton" title="Cancel" />

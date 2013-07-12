@@ -23,10 +23,6 @@
 	color: "#000"
 },
 "Button": {
-	font: {
-		fontSize: '16dp',
-		fontWeight: 'normal'
-	},
 	borderRadius: 4,
 	backgroundGradient:{
       type:'linear',
@@ -34,6 +30,19 @@
       backFillStart: false
    },
   	height: '34dp',
+},
+"Button[platform=ios]": {
+	style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'normal'
+	},
+},
+"Button[platform=android]": {
+	font: {
+		fontSize: '14dp',
+		fontWeight: 'normal'
+	},
 },
 ".NavHeader": {
 	font: {
@@ -43,9 +52,6 @@
 	textAlign: 'center',
 	color: "#000"
 }
-"Button[platform=ios]": {
-	style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
-},
 "#usage": {
 	top: '50dp',
 	left: '20dp',
@@ -83,7 +89,7 @@
 	top: '4dp',
 	left: '5dp',
 	width: '90dp',
-	title: 'Reset',
+	title: 'Restart',
 	visible: false
 },
 "#rr": {

@@ -25,6 +25,7 @@
 */
 
 var APP = Alloy.Globals.APP;
+var CFG = require('alloy').CFG;
 
 if(OS_ANDROID){
     Alloy = require("alloy")
@@ -116,27 +117,29 @@ $.init = function() {
   		}
 	});
 
-	$.mode.addEventListener("click",function(e){
-		$.dlgMode.show();
-	});
+	if( false == CFG.restrictModeToTimed ) {
+		$.mode.addEventListener("click",function(e){
+			$.dlgMode.show();
+		});
 
-	$.progress.addEventListener("click",function(e){
-		$.dlgMode.show();
-	});
+		$.progress.addEventListener("click",function(e){
+			$.dlgMode.show();
+		});
 
-	$.dlgMode.addEventListener("click",function(e){
-		if(OS_ANDROID) {
-			if(e.button) {		// The only button defined is cancel
-				e.index = -1;
+		$.dlgMode.addEventListener("click",function(e){
+			if(OS_ANDROID) {
+				if(e.button) {		// The only button defined is cancel
+					e.index = -1;
+				}
 			}
-		}
-		Ti.API.info("Option index = " + e.index);
-		if(e.index != $.dlgMode.cancel && e.index != -1) {
-			$.abort();
-			mode = e.index;
-			$.setMode();
-		}
-	});
+			Ti.API.info("Option index = " + e.index);
+			if(e.index != $.dlgMode.cancel && e.index != -1) {
+				$.abort();
+				mode = e.index;
+				$.setMode();
+			}
+		});
+	}
 
 	$.resetbut.addEventListener("click", $.reset);
 

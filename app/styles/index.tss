@@ -40,7 +40,8 @@
 		fontSize: '16dp',
 		fontWeight: 'bold'
 	},
-	textAlign: 'center',	
+	textAlign: 'center',
+	color: "#000"
 }
 "Button[platform=ios]": {
 	style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN

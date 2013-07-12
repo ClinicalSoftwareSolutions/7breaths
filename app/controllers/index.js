@@ -155,6 +155,7 @@ $.init = function() {
 	if (!Ti.App.Properties.getBool("APP:INIT_DONE", false)) {
 		var tandc = Alloy.createController("tandc", {}).getView();
 		// Open on top of the mainwindow
+		Ti.API.debug("index.js Opening the T&C window");
 		tandc.open();
 	}
 

@@ -20,6 +20,14 @@
       backFillStart: false
    },
 }
+".NavHeader": {
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'bold'
+	},
+	textAlign: 'center',
+	color: "#000",
+},
 "#styledlabel": {
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
@@ -105,6 +113,11 @@
 	color: '#336699',
 	left: '5dp',
 	height: '36dp',
+	font: {
+		fontSize: '14dp',
+		fontWeight: 'normal'
+	},
+	textAlign: 'left',
 }
 "#reg_info": {
 	font: {

@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="MainWindow">
+	<Window id="MainWindow" navBarHidden="true">
         <View id="NavbarWrapperTC" class="navbar">
             <Label class="NavHeader" text="7 Breaths" />
         <Button id="abortbut" />

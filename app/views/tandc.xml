@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="Window" fullscreen="true" navBarHidden="true">
+	<Window id="Window">
 		<ScrollableView id="scrollableView" showPagingControl="false" scrollingEnabled="false">
          <View id="page_tandc">
 				<View id="NavbarWrapperTC" class="navbar">

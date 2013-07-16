@@ -1,7 +1,7 @@
 "#MainWindow": {
 	backgroundColor:"white"
 },
-"#MainWindow[platform=android]": {
+"Window[platform=android]": {
    navBarHidden: true,
    exitOnClose: true
 },

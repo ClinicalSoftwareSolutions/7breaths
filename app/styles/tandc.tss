@@ -1,6 +1,10 @@
 "#Window": {
 	backgroundColor: "white"
 },
+"Window[platform=android]": {
+   navBarHidden: true,
+   exitOnClose: true
+},
 "#ScrollWrapper": {
 	top: '45dp',
 	left: '5dp',

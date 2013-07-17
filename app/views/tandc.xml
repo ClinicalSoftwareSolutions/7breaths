@@ -40,8 +40,9 @@
 		   	<Button id="register_but" class="actionButton" title="Register" />
 		   	
 		   	<!-- Picker for the user role -->
-		   	<View id="rolePickerWrapper" visible="false">
-			   	<Picker id="rolePickerControl" bottom="48dp" selectionIndicator="true" useSpinner="true" >
+            <!-- Only on IOS as very small on android -->
+		   	<View id="rolePickerWrapper" visible="false" platform="ios">
+			   	<Picker id="rolePickerControl" >
 	            	<PickerColumn id="role">
 	                <PickerRow title="Ward Nursing Staff" />
 	                <PickerRow title="ICU/HDU Nursing Staff" />
@@ -55,7 +56,25 @@
 	        		</Picker>
 			   	<Button id="cancel_role_but" class="actionButton" title="Cancel" />
 			   	<Button id="select_role_but" class="actionButton" title="Select" />
-        		</View>
+        	</View>
+			
+			<OptionDialog id="rolePickerControl" title="Choose a role" platform="android">
+	            <Options>
+	                <Option>Ward Nursing Staff</Option>
+	                <Option>ICU/HDU Nursing Staff</Option>
+	                <Option>Hospital Nursing Assistant</Option>
+	                <Option>Hospital Medical Staff</Option>
+	                <Option>Community Nursing Staff</Option>
+	                <Option>Community Medical Staff</Option>
+	                <Option>Not in healthcare</Option>
+	                <Option>Other healthcare</Option>
+	            </Options>
+	            <ButtonNames>
+	                <ButtonName>Cancel</ButtonName>
+	            </ButtonNames>
+        	</OptionDialog>
+
+
          </View>
       </ScrollableView>
    </Window>

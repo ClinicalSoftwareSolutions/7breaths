@@ -11,3 +11,5 @@
 // Alloy.Globals.someGlobalFunction = function(){};
 
 Ti.Analytics.featureEvent('app:Started');
+
+Alloy.Globals.datastore = require('datastore');

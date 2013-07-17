@@ -34,8 +34,6 @@ if(OS_ANDROID){
 
 $.DEFAULT_ROLE_TEXT = "Please choose one ...";
 
-var dataStore = require('datastore');
-
 var ARGS = arguments[0] || {};
 $.reachedBottom = false;
 $.scrollBottomY = 0;
@@ -65,25 +63,19 @@ $.init = function() {
     // Terms accepted
     $.accept_but.addEventListener("click",function(e){
         if ($.reachedBottom === false) {
-            Ti.Analytics.featureEvent('APP:Tried_TandC_Accepted');
+            Ti.Analytics.featureEvent('APP:Tried_TandC_Accepted',{});
             alert("Please scroll down through all the Terms and Conditions before accepting them. Thank you.")
             return;
         }
-        Ti.Analytics.featureEvent("APP:TandC_ACCEPTED");
+        Ti.Analytics.featureEvent("APP:TandC_ACCEPTED",{});
         Ti.App.Properties.setBool("APP:TandC_ACCEPTED", true);
         $.scrollableView.setCurrentPage(1);
     });
 
     // Terms rejected
     $.reject_but.addEventListener("click",function(e){
-        Ti.Analytics.featureEvent('APP:TandC_Rejected');
+        Ti.Analytics.featureEvent('APP:TandC_Rejected',{});
         alert("Thank you for your interest in 7Breaths. As the terms are not acceptable please un-install the application.")
-    });
-
-    // Close picker if there is a click outside of the picker control
-    $.rolePickerWrapper.addEventListener("click",function(e){
-        Ti.API.debug("rolePickerWrapper click")
-        $.rolePickerWrapper.visible = false;
     });
 
     // Open the role picker
@@ -91,27 +83,59 @@ $.init = function() {
         $.reg_firstname.blur();
         $.reg_surname.blur();
         $.reg_email.blur();
-        $.rolePickerWrapper.visible = true;
+        if(OS_IOS) {
+            $.rolePickerWrapper.visible = true;
+        }
+        if(OS_ANDROID) {
+            $.rolePickerControl.show();
+        }
     });
 
-    // $.rolePickerControl.addEventListener("change",function(e){
-    //     Ti.API.debug("Click on picker row: " + e.row.title);
-    // });
+    if(OS_IOS) {
+        // Close picker if there is a click outside of the picker control
+        $.rolePickerWrapper.addEventListener("click",function(e){
+            Ti.API.debug("rolePickerWrapper click")
+            $.rolePickerWrapper.visible = false;
+        });
+    
+        // Set label if a new role is selected
+        $.select_role_but.addEventListener("click",function(e){
+            Ti.API.debug("Picker row selected: " + $.rolePickerControl.getSelectedRow(0).title);
+            $.roleLabel.text = $.rolePickerControl.getSelectedRow(0).title;
+        });
+    }
 
-    // Set label if a new role is selected
-    $.select_role_but.addEventListener("click",function(e){
-        Ti.API.debug("Picker row selected: " + $.rolePickerControl.getSelectedRow(0).title);
-        $.roleLabel.text = $.rolePickerControl.getSelectedRow(0).title;
-    });
+    if(OS_ANDROID) {
+        $.rolePickerControl.addEventListener("click",function(e){
+            if(e.button) {      // The only button defined is cancel
+                e.index = -1;
+            }
+            Ti.API.info("Option index = " + e.index);
+            if(e.index != $.rolePickerControl.cancel && e.index != -1) {
+                $.roleLabel.text = $.rolePickerControl.options[e.index];
+            }
+        });
+    }
 
     // User registers
     $.register_but.addEventListener("click",function(e){
         var validate_msg = $.Validates();
         if(0 === validate_msg.length) {
-            dataStore.RegisterUser(reg_email.value, reg_firstname.value, reg_surname.value,
+            Alloy.Globals.datastore.RegisterUser($.reg_email.value, $.reg_firstname.value, $.reg_surname.value,
                 $.roleLabel.text);
             Ti.App.Properties.setBool("APP:INIT_DONE", true);
-            $.Window.close();
+            var dialog = Ti.UI.createAlertDialog({
+                message: 'Thank you for registering. We will keep you informed of any outcomes.',
+                ok: 'Okay',
+                title: 'Thank you'
+            });
+
+            dialog.addEventListener('click', function(e){
+                Ti.API.debug("About to close T&C window");
+                $.Window.close();
+            });
+
+            dialog.show();
         }
         else {
             alert(validate_msg);

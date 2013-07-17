@@ -133,6 +133,17 @@
 	left: '10dp',
 	right: '10dp'	
 }
+"#rolePickerControl": {
+	bottom: "48dp",
+	selectionIndicator: true,
+	useSpinner: true,
+},
+"Picker[platform=android]": {
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'normal'
+	},
+},
 "#rolePickerWrapper": {
 	width: '100%',
 	height: '100%',

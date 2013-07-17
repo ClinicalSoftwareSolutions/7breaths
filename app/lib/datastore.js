@@ -113,7 +113,7 @@ exports.storeData = function(_realPerson, _mode, _data, _rr) {
   			_sendPendingData();
   		},
   		error: function(model, error, options) {
-  			Ti.API.debug(error);
+  			Ti.API.debug("rr.create Error: "+error);
   			// Store in database
   			_storeInDb(_realPerson, _mode, _data, _rr);
   		}
@@ -139,6 +139,7 @@ exports.RegisterUser = function(_email, _firstname, _surname, _role) {
         	Ti.App.Properties.setString("APP:RegisteredUser", _email);
   		},
   		error: function(model, result, options) {
+  			Ti.API.debug("user.create Error: "+error);
 			Ti.Analytics.featureEvent("APP:UserRegistrationError");
         	Ti.App.Properties.setString("APP:RegisteredUserPending", JSON.stringify(userObj,null,0));
   		}

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
 	<id>uk.co.clinicalsoftwaresolutions.sevenbreaths</id>
-	<name>7Breaths</name>
+	<name>SevenBreaths</name>
 	<version>1.0</version>
-	<publisher>not specified</publisher>
-	<url/>
-	<description>not specified</description>
-	<copyright>not specified</copyright>
+	<publisher>Clinical Software Solutions Ltd</publisher>
+	<url>http://www.clinsoftsolutions.com</url>
+	<description>Easily calculate the respiratory rate</description>
+	<copyright>All rights reserved. Neville Dastur</copyright>
 	<icon>appicon.png</icon>
 	<persistent-wifi>false</persistent-wifi>
 	<prerendered-icon>false</prerendered-icon>

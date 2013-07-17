@@ -31,7 +31,7 @@
 
 // Include the StackMob stuff
 Ti.include('/stackmob.cfg.js');
-StackMob = require('ti.stackmob')({ publicKey : stackmob_api_key, secure : true });
+StackMob = require('ti.stackmob')({ publicKey : stackmob_api_key, secure : true, apiVersion: stackmob_api_ver });
 var _RR = StackMob.Model.extend({ schemaName: 'rr' });
 
 var _networkOnline = false;

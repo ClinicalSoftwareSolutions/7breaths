@@ -42,7 +42,7 @@ var realPerson = false;
 
 $.dlgConfirmSend = null;
 
-var dataStore = require('datastore');
+var dataStore = Alloy.Globals.datastore;
 
 /*
  * Init
@@ -165,12 +165,25 @@ $.init = function() {
       	if (!$.MainWindow.activityListenerLoaded) {
             var activity = $.MainWindow.activity;
             $.MainWindow.activityListenerLoaded = true;
-        		dataStore.init({activity: activity});
+       		dataStore.init({activity: activity});
+
+			activity.addEventListener("resume",function(_e){
+				Ti.API.debug("index.js Android resume");
+				$.abort();
+				$.abortbut.visible = false;
+				});
+
         	}
     	});
 	}
 	else {
 		dataStore.init({activity: undefined});
+
+		Ti.App.addEventListener('resumed', function(e){
+			Ti.API.debug("index.js iOS resume");
+			$.abort();
+			$.abortbut.visible = false;
+		});
 	}
 }
 

@@ -11,9 +11,11 @@ The name "7Breaths" was suggested by Barry Rowlingson
 
 The initial mailing list discussion can be found on the Google groups pages https://groups.google.com/forum/?hl=en&fromgroups#!topic/nhshackday/ioOECJ3ZVEI
 
-## App Video
+## App Screenshot and Video
 
-<iframe width="853" height="480" src="//www.youtube-nocookie.com/embed/ypfS9PWwp9E" frameborder="0" allowfullscreen></iframe>
+[![ScreenShot](https://raw.github.com/ClinicalSoftwareSolutions/7breaths/master/AppScreenshot.png)](http://youtu.be/ypfS9PWwp9E)
+
+Click on screenshot to goto the video
 
 ## Building
 

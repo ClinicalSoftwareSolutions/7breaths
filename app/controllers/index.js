@@ -148,15 +148,19 @@ $.init = function() {
 		$.abortbut.visible = false;
 	});
 
-	// Open the main window
-	$.MainWindow.open();
-
 	// Show T&C on top if they haven't been accepted
 	if (!Ti.App.Properties.getBool("APP:INIT_DONE", false)) {
+		Ti.App.addEventListener("APP:TANDC_DONE",function(){
+			// Open the main window
+			$.MainWindow.open();
+		});
 		var tandc = Alloy.createController("tandc", {}).getView();
-		// Open on top of the mainwindow
 		Ti.API.debug("index.js Opening the T&C window");
 		tandc.open();
+	}
+	else {
+		// Open the main window
+		$.MainWindow.open();
 	}
 
 	if(OS_ANDROID){

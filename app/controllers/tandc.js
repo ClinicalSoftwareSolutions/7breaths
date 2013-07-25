@@ -131,6 +131,7 @@ $.init = function() {
             });
 
             dialog.addEventListener('click', function(e){
+                Ti.App.fireEvent("APP:TANDC_DONE");
                 Ti.API.debug("About to close T&C window");
                 $.Window.close();
             });
@@ -152,6 +153,7 @@ $.init = function() {
             Ti.App.Properties.setInt("APP:REG_COUNTDOWN", _skipCount * 2);
         }
         Ti.App.Properties.setBool("APP:INIT_DONE", true);
+        Ti.App.fireEvent("APP:TANDC_DONE");
         $.Window.close();
     });
 

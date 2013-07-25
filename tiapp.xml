@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
 	<id>uk.co.clinicalsoftwaresolutions.sevenbreaths</id>
-	<name>SevenBreaths</name>
-	<version>1.0</version>
+	<name>Seven Breaths</name>
+	<version>1.0.1</version>
 	<publisher>Clinical Software Solutions Ltd</publisher>
 	<url>http://www.clinsoftsolutions.com</url>
 	<description>Easily calculate the respiratory rate</description>
@@ -27,7 +27,15 @@
 			<orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
 		</orientations>
 	</iphone>
+	<property name="ti.android.fastdev" type="bool">false</property>
 	<android xmlns:android="http://schemas.android.com/apk/res/android">
+    	<tool-api-level>14</tool-api-level>
+    	<manifest android:installLocation="auto" android:versionCode="1" android:versionName="1.0.1">
+        	<supports-screens android:anyDensity="true"/>
+        	<uses-sdk android:maxSdkVersion="17"
+            android:minSdkVersion="8" android:targetSdkVersion="14"/>
+			<application android:theme="@android:style/Theme.Holo.Light"/>
+    	</manifest>
 	</android>
 	<mobileweb>
 		<precache>

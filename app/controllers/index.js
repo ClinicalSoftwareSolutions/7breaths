@@ -172,9 +172,12 @@ $.init = function() {
        		dataStore.init({activity: activity});
 
 			activity.addEventListener("resume",function(_e){
-				Ti.API.debug("index.js Android resume");
-				$.abort();
-				$.abortbut.visible = false;
+				//Ti.API.debug("index.js Android resume");
+				// Use abort but visible as a proxy of a count being in progress. This fixes issue #12
+				if($.abortbut.visible) {
+					$.abort();
+					$.abortbut.visible = false;
+				}
 				});
 
         	}
@@ -184,9 +187,12 @@ $.init = function() {
 		dataStore.init({activity: undefined});
 
 		Ti.App.addEventListener('resumed', function(e){
-			Ti.API.debug("index.js iOS resume");
-			$.abort();
-			$.abortbut.visible = false;
+			//Ti.API.debug("index.js iOS resume");
+			// Use abort but visible as a proxy of a count being in progress. This fixes issue #12
+			if($.abortbut.visible) {
+				$.abort();
+				$.abortbut.visible = false;
+			}	
 		});
 	}
 }

@@ -70,7 +70,7 @@
 "#progress": {
 	bottom: '90dp',
 	width: '90%',
-	height: Ti.UI.SIZE,
+	height: '20dp',
 	min: 0,
 	max: 7,
 	value: 0,

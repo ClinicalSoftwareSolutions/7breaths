@@ -7,7 +7,7 @@ The initial idea was from Wai Keong on the NHS HackDay mailing list. Details of 
 
 7Breaths is an application to make measuring the respiratory rate clinically (i.e. by a person watching) easy.
 
-The name "7Breaths" was suggested by Barry Rowlingson
+The name "[7Breaths](http://www.clinsoftsolutions.com/app_gallery/7breaths.html)" was suggested by Barry Rowlingson
 
 The initial mailing list discussion can be found on the Google groups pages https://groups.google.com/forum/?hl=en&fromgroups#!topic/nhshackday/ioOECJ3ZVEI
 

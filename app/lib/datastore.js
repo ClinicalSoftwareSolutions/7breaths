@@ -122,6 +122,9 @@ exports.storeData = function(_realPerson, _mode, _data, _rr) {
 }
 
 exports.RegisterUser = function(_email, _firstname, _surname, _role) {
+	var utcTime = new Date();
+	var _timezoneoffset = utcTime.getTimezoneOffset();
+
 	// Make an object so that on error we can save easily for retry
 	var userObj = {
 		username: _email,
@@ -129,7 +132,8 @@ exports.RegisterUser = function(_email, _firstname, _surname, _role) {
 		password: Ti.Utils.sha1(_email),	// not interested in a true password
 		firstname: _firstname,
 		surname: _surname,
-		role: _role
+		role: _role,
+		timezoneoffset: _timezoneoffset
 	};
 	var user = new StackMob.User(userObj);
 
